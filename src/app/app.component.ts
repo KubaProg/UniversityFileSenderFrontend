@@ -1,12 +1,10 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import {MatFormField, MatLabel} from "@angular/material/form-field";
-import {MatInput} from "@angular/material/input";
-import {LoginComponent} from "./login-screen/login/login.component";
+import { RouterOutlet} from '@angular/router';
+import {StartComponent} from "./start-screen/start/start.component";
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, MatLabel, MatInput, MatFormField, LoginComponent],
+  imports: [RouterOutlet,StartComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })

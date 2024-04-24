@@ -1,4 +1,57 @@
-/* You can add global styles to this file, and also import other style files */
+@use '@angular/material' as mat;
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+// Import the core styles and required mixins for the theme
+@include mat.core();
+
+// Define a white color palette
+$custom-white-palette: (
+        50: #ffffff,
+        100: #ffffff,
+        200: #ffffff,
+        300: #ffffff,
+        400: #ffffff,
+        500: #ffffff,  // primary white
+        600: #ffffff,
+        700: #ffffff,
+        800: #ffffff,
+        900: #ffffff,
+        A100: #ffffff,
+        A200: #ffffff,
+        A400: #ffffff,
+        A700: #ffffff,
+        contrast: (
+                50: #000000,
+                100: #000000,
+                200: #000000,
+                300: #000000,
+                400: #000000,
+                500: #000000,  // primary contrast text color
+                600: #000000,
+                700: #000000,
+                800: #000000,
+                900: #000000,
+                A100: #000000,
+                A200: #000000,
+                A400: #000000,
+                A700: #000000,
+        )
+);
+
+// Define the custom primary palette as white
+$custom-primary: mat.define-palette($custom-white-palette,A700);
+
+// Accent and warning palettes (as before)
+$custom-accent: mat.define-palette(mat.$pink-palette, A200);
+$custom-warn: mat.define-palette(mat.$red-palette);
+
+// Define the theme
+$custom-theme: mat.define-light-theme((
+        color: (
+                primary: $custom-primary,
+                accent: $custom-accent,
+                warn: $custom-warn,
+        )
+));
+
+// Include theme styles for all components
+@include mat.all-component-themes($custom-theme);
