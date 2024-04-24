@@ -1,0 +1,33 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.option-panel {
+  border: 10px solid white;
+  padding: 100px;
+  text-align: center;
+  background-color: rgba(128, 128, 128, 0.5);
+}
+
+button{
+  margin: 10px;
+  padding: 30px;
+  border: 2px solid black;
+}
+
+button:hover{
+  background-color: white;
+  color: black;
+}
+
+.icon-display {
+  transform: scale(4);
+}
+
+mat-icon{
+  margin-bottom: 70px;
+  color: white
+}
