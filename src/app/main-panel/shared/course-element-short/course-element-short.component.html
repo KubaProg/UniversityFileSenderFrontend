@@ -1,3 +1,7 @@
 <div class="course-element">
   <h3>{{ course }}</h3>
+  <div *ngIf="!isStudent" class="button-group">
+    <button mat-button>Edit</button>
+    <button mat-button>Delete</button>
+  </div>
 </div>
