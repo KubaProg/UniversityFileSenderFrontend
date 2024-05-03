@@ -19,9 +19,10 @@ import {MatIcon} from "@angular/material/icon";
 export class StartComponent {
   constructor(private router: Router) { }
 
-  navigateLogin() {
-    this.router.navigate(['login']);
+  navigateLogin(type: string) {
+    this.router.navigate(['login', type]);
   }
+
   navigateRegister() {
     this.router.navigate(['register'])
   }

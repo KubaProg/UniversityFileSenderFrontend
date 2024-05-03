@@ -3,8 +3,8 @@
     <span>
           <mat-icon class="icon-display">home</mat-icon>
     </span>
-    <button mat-button  (click)="navigateLogin()">User panel</button>
-    <button mat-button  (click)="navigateLogin()">Employee panel</button>
+    <button mat-button (click)="navigateLogin('student')">Student panel</button>
+    <button mat-button (click)="navigateLogin('admin')">Admin panel</button>
     <button mat-button  (click)="navigateRegister()">Register</button>
   </mat-card>
 </div>

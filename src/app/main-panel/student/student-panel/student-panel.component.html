@@ -1,1 +1,7 @@
-<p>student-panel works!</p>
+<app-top-bar></app-top-bar>
+
+<div class="content">
+  <button mat-raised-button color="primary" class="action-button">Enroll in the course</button>
+  <h2>Your assigned courses:</h2>
+  <app-course-element-short *ngFor="let course of courses" [course]="course" [isStudent]="true"></app-course-element-short>
+</div>

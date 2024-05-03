@@ -30,10 +30,6 @@ export class RegisterComponent {
     });
   }
 
-  onSubmit() {
-
-  }
-
     registerUser() {
 
     }

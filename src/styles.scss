@@ -55,3 +55,6 @@ $custom-theme: mat.define-light-theme((
 
 // Include theme styles for all components
 @include mat.all-component-themes($custom-theme);
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
