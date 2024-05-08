@@ -1,5 +1,5 @@
 <mat-dialog-content>
-  <p>Provide course name</p>
+  <p>Type course name to be deleted</p>
   <mat-form-field>
     <mat-label>Course name</mat-label>
     <input matInput [(ngModel)]="data.name">
@@ -7,5 +7,5 @@
 </mat-dialog-content>
 <mat-dialog-actions>
   <button mat-button (click)="onCancelCLick()">Cancel</button>
-  <button mat-button [mat-dialog-close]="data.name" cdkFocusInitial>Save</button>
+  <button mat-button [mat-dialog-close]="data.name" cdkFocusInitial>Delete</button>
 </mat-dialog-actions>
