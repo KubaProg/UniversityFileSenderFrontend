@@ -2,7 +2,7 @@ mat-toolbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: rgba(128, 128, 128, 0.5);
+  background-color: #ada397;
 
   .spacer {
     flex: 1 1 auto;
@@ -10,5 +10,7 @@ mat-toolbar {
 
   button {
     margin-right: 8px;
+    background-color: #ff6666;
+
   }
 }

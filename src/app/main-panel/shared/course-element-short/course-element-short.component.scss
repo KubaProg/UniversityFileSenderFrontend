@@ -1,6 +1,8 @@
 .course-element {
+  color: white;
   display: flex;
   justify-content: space-between;
+  background-color: #034f84;;
   align-items: center;
   width: 600px;
   height: 100px;
@@ -18,4 +20,10 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+
+  button{
+    margin-top: 2px;
+    background-color: #8faad6;
+  }
+
 }

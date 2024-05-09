@@ -1,0 +1,35 @@
+.task-element {
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 300px;
+  padding: 20px;
+  margin: 10px 0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: #034f84;
+
+  .title-and-buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+
+
+    h3 {
+      margin: 0;
+    }
+
+    .button-group {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      button{
+        margin-top: 2px;
+        background-color: #8faad6;
+      }
+    }
+  }
+}

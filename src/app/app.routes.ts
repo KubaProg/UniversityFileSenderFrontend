@@ -4,6 +4,7 @@ import {LoginComponent} from "./login-screen/login/login.component";
 import {RegisterComponent} from "./register-screen/register/register.component";
 import {AdminPanelComponent} from "./main-panel/admin/admin-panel/admin-panel.component";
 import {StudentPanelComponent} from "./main-panel/student/student-panel/student-panel.component";
+import {CoursePanelComponent} from "./main-panel/admin/course-panel/course-panel.component";
 
 export const routes: Routes = [
   { path: '', redirectTo: '/start', pathMatch: 'full' },
@@ -12,5 +13,6 @@ export const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'admin', component: AdminPanelComponent },
   { path: 'student', component: StudentPanelComponent },
-  { path: 'login/:type', component: LoginComponent }
+  { path: 'login/:type', component: LoginComponent },
+  { path: 'course-panel/:course', component: CoursePanelComponent }
 ];
