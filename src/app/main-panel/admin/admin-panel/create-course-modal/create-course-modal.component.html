@@ -1,0 +1,11 @@
+<mat-dialog-content [formGroup]="courseForm">
+  <p>Provide course name</p>
+  <mat-form-field>
+    <mat-label>Course name</mat-label>
+    <input matInput formControlName="courseName">
+  </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button (click)="onCancelClick()">Cancel</button>
+  <button mat-button [disabled]="courseForm.invalid" [mat-dialog-close]="courseForm.value.name" cdkFocusInitial>Save</button>
+</mat-dialog-actions>

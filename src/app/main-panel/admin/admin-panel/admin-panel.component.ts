@@ -4,10 +4,14 @@ import {CourseElementShortComponent} from "../../shared/course-element-short/cou
 import {NgForOf} from "@angular/common";
 import {MatButton} from "@angular/material/button";
 import {MatDialog} from "@angular/material/dialog";
-import {CreateCourseModalComponent} from "../create-course-modal/create-course-modal.component";
+import {CreateCourseModalComponent} from "./create-course-modal/create-course-modal.component";
 
-export interface CourseDialogData {
+export interface addCourseDialogData {
   name: string;
+}
+
+export interface addTaskDialogData {
+  newTask: string;
 }
 
 @Component({

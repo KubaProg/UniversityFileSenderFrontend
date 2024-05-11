@@ -10,7 +10,7 @@ import {
 import {MatFormField, MatLabel} from "@angular/material/form-field";
 import {MatInput} from "@angular/material/input";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {CourseDialogData} from "../admin-panel/admin-panel.component";
+import {addCourseDialogData} from "../admin-panel.component";
 
 @Component({
   selector: 'app-delete-course-modal',
@@ -32,7 +32,7 @@ import {CourseDialogData} from "../admin-panel/admin-panel.component";
 export class DeleteCourseModalComponent {
   constructor(
     public dialogRef: MatDialogRef<DeleteCourseModalComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: CourseDialogData,
+    @Inject(MAT_DIALOG_DATA) public data: addCourseDialogData,
   ) {}
 
   onCancelCLick(): void {

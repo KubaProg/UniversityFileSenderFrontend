@@ -1,0 +1,41 @@
+<mat-dialog-content [formGroup]="taskForm">
+  <p>Provide course name</p>
+  <mat-form-field>
+    <mat-label>Task name</mat-label>
+    <input matInput formControlName="newTask">
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Task deadline</mat-label>
+    <input matInput [matDatepicker]="deadlinePicker" formControlName="deadline">
+    <mat-datepicker-toggle matSuffix [for]="deadlinePicker"></mat-datepicker-toggle>
+    <mat-datepicker #deadlinePicker></mat-datepicker>
+  </mat-form-field>
+
+
+  <mat-form-field>
+    <mat-label>Task description</mat-label>
+    <textarea matInput formControlName="description"></textarea>
+  </mat-form-field>
+
+  <div>
+    <mat-label>Task attachments</mat-label>
+    <button type="button" mat-raised-button (click)="fileInput.click()">Choose File</button>
+    <input hidden (change)="onFileSelected($event)" #fileInput type="file" multiple>
+  </div>
+
+  <div *ngFor="let file of attachments; let i = index">
+    <mat-chip-listbox>
+      <mat-chip>
+        {{ file.name }}
+        <mat-icon matChipRemove (click)="removeAttachment(i)">cancel</mat-icon>
+      </mat-chip>
+    </mat-chip-listbox>
+  </div>
+
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button mat-button (click)="onCancelClick()">Cancel</button>
+  <button mat-button [disabled]="taskForm.invalid" [mat-dialog-close]="taskForm.value" cdkFocusInitial>Save</button>
+</mat-dialog-actions>

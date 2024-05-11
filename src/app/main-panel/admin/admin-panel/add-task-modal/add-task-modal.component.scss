@@ -1,0 +1,38 @@
+.mat-dialog-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px; /* Increased padding for more space around the content */
+}
+
+mat-form-field {
+  width: 100%; /* Full width to utilize space */
+  margin-bottom: 20px; /* Increased margin to space out the fields more */
+}
+
+textarea[matInput] {
+  min-height: 120px; /* Slightly larger to facilitate easier entry */
+  resize: vertical; /* Allows users to resize the input vertically if needed */
+}
+
+.mat-dialog-actions {
+  display: flex;
+  justify-content: space-around;
+  padding: 20px; /* More padding to separate actions from content */
+}
+
+button[mat-raised-button],
+button[mat-button] {
+  width: 100%; /* Full width buttons */
+  margin-bottom: 15px; /* More spacing between buttons for clarity */
+}
+
+input[type="file"] {
+  display: none; /* Keeps file input hidden */
+}
+
+mat-label {
+  width: 100%; /* Labels are full width */
+  text-align: center; /* Center-align text for consistency */
+  margin-bottom: 10px; /* Increased bottom margin for better visual separation */
+}

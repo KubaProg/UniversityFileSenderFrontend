@@ -2,8 +2,8 @@ import {Component, Input} from '@angular/core';
 import {MatButton} from "@angular/material/button";
 import {NgIf} from "@angular/common";
 import {MatDialog} from "@angular/material/dialog";
-import {CreateCourseModalComponent} from "../../admin/create-course-modal/create-course-modal.component";
-import {DeleteCourseModalComponent} from "../../admin/delete-course-modal/delete-course-modal.component";
+import {CreateCourseModalComponent} from "../../admin/admin-panel/create-course-modal/create-course-modal.component";
+import {DeleteCourseModalComponent} from "../../admin/admin-panel/delete-course-modal/delete-course-modal.component";
 import {Router, RouterLink} from "@angular/router";
 
 @Component({
