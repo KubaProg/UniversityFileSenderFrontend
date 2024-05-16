@@ -8,6 +8,7 @@ import {TaskElementShortComponent} from "../../../shared/task-element-short/task
 import {CreateCourseModalComponent} from "../create-course-modal/create-course-modal.component";
 import {MatDialog} from "@angular/material/dialog";
 import {AddTaskModalComponent} from "../add-task-modal/add-task-modal.component";
+import {NotificationShortComponent} from "../notification-short/notification-short.component";
 
 @Component({
   selector: 'app-course-panel',
@@ -20,6 +21,7 @@ import {AddTaskModalComponent} from "../add-task-modal/add-task-modal.component"
     NgForOf,
     NgIf,
     TaskElementShortComponent,
+    NotificationShortComponent,
   ],
   templateUrl: './course-panel.component.html',
   styleUrls: ['./course-panel.component.scss']

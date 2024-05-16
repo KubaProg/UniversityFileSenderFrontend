@@ -12,6 +12,9 @@ export interface addCourseDialogData {
 
 export interface addTaskDialogData {
   newTask: string;
+  deadline: string;
+  description: string;
+  attachments: File[];
 }
 
 @Component({
