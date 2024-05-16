@@ -1,0 +1,11 @@
+<mat-dialog-content>
+  <p>Type task name to be deleted</p>
+  <mat-form-field>
+    <mat-label>Task name</mat-label>
+    <input matInput [(ngModel)]="data.newTask">
+  </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button (click)="onCancelCLick()">Cancel</button>
+  <button mat-button [mat-dialog-close]="data.newTask" cdkFocusInitial>Delete</button>
+</mat-dialog-actions>
