@@ -1,0 +1,18 @@
+<app-top-bar></app-top-bar>
+
+<div class="content">
+  <h2>Courses you can join:</h2>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Search courses</mat-label>
+    <input matInput [(ngModel)]="searchTerm" (input)="filterCourses()" />
+  </mat-form-field>
+
+  <!-- Course List -->
+  <app-course-element-short
+    *ngFor="let course of filteredCourses"
+    [course]="course"
+    [isStudent]="true"
+    [findMode]="true">
+  </app-course-element-short>
+</div>

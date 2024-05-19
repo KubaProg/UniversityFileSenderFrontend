@@ -5,7 +5,6 @@ import {MatList, MatListItem} from "@angular/material/list";
 import {MatButton} from "@angular/material/button";
 import {NgForOf, NgIf} from "@angular/common";
 import {TaskElementShortComponent} from "../../../shared/task-element-short/task-element-short.component";
-import {CreateCourseModalComponent} from "../create-course-modal/create-course-modal.component";
 import {MatDialog} from "@angular/material/dialog";
 import {AddTaskModalComponent} from "../add-task-modal/add-task-modal.component";
 import {NotificationShortComponent} from "../notification-short/notification-short.component";

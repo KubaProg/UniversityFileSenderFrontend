@@ -10,8 +10,7 @@ import {
 } from "@angular/material/dialog";
 import {MatFormField, MatLabel} from "@angular/material/form-field";
 import {MatInput} from "@angular/material/input";
-import {addCourseDialogData, addTaskDialogData} from "../admin-panel.component";
-
+import {addTaskDialogData} from "../../admin-panel.component";
 @Component({
   selector: 'app-delete-task-modal',
   standalone: true,

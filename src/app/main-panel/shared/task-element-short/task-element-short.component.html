@@ -2,8 +2,8 @@
   <div class="title-and-buttons">
     <h3>{{ task }}</h3>
     <div class="button-group">
-      <button mat-button>Edit</button>
-      <button mat-button>Delete</button>
+      <button mat-button  (click)="openTaskEditModal()" >Edit</button>
+      <button mat-button  (click)="openDeleteTaskModal()">Delete </button>
     </div>
   </div>
 </div>

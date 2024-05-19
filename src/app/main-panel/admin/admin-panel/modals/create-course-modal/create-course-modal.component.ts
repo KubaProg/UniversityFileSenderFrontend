@@ -7,7 +7,7 @@ import {FormGroup, FormControl, ReactiveFormsModule, Validators} from '@angular/
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
 import {MatButtonModule} from "@angular/material/button";
-import {addCourseDialogData} from "../admin-panel.component";
+import {addCourseDialogData} from "../../admin-panel.component";
 
 @Component({
   selector: 'app-create-course-modal',

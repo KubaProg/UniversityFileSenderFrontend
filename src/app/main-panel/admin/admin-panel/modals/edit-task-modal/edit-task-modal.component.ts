@@ -14,7 +14,6 @@ import {MatFormField, MatLabel, MatSuffix} from "@angular/material/form-field";
 import {MatIcon} from "@angular/material/icon";
 import {MatInput} from "@angular/material/input";
 import {NgForOf} from "@angular/common";
-import {addTaskDialogData} from "../admin-panel.component";
 import {provideNativeDateAdapter} from "@angular/material/core";
 import {MatExpansionModule, MatExpansionPanel, MatExpansionPanelTitle} from "@angular/material/expansion";
 import {
@@ -26,6 +25,7 @@ import {
   MatRowDef,
   MatTable
 } from "@angular/material/table";
+import {addTaskDialogData} from "../../admin-panel.component";
 
 @Component({
   selector: 'app-edit-task-modal',

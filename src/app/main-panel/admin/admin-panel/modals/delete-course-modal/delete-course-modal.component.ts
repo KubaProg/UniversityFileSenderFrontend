@@ -10,7 +10,7 @@ import {
 import {MatFormField, MatLabel} from "@angular/material/form-field";
 import {MatInput} from "@angular/material/input";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {addCourseDialogData} from "../admin-panel.component";
+import {addCourseDialogData} from "../../admin-panel.component";
 
 @Component({
   selector: 'app-delete-course-modal',

@@ -5,6 +5,7 @@ import {RegisterComponent} from "./register-screen/register/register.component";
 import {AdminPanelComponent} from "./main-panel/admin/admin-panel/admin-panel.component";
 import {StudentPanelComponent} from "./main-panel/student/student-panel/student-panel.component";
 import {CoursePanelComponent} from "./main-panel/admin/admin-panel/course-panel/course-panel.component";
+import {CourseFindComponent} from "./main-panel/student/student-panel/course-find/course-find.component";
 
 export const routes: Routes = [
   { path: '', redirectTo: '/start', pathMatch: 'full' },
@@ -14,5 +15,6 @@ export const routes: Routes = [
   { path: 'admin', component: AdminPanelComponent },
   { path: 'student', component: StudentPanelComponent },
   { path: 'login/:type', component: LoginComponent },
-  { path: 'course-panel/:course', component: CoursePanelComponent }
+  { path: 'course-panel/:course', component: CoursePanelComponent },
+  { path: 'courses', component: CourseFindComponent }
 ];
