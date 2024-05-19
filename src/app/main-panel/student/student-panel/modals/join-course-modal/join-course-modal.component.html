@@ -1,0 +1,10 @@
+<mat-dialog-actions class="dialog-actions">
+  <div class="info-section">
+    <mat-label class="mat-title">Course Name: {{ data.newTask }}</mat-label>
+    <mat-label class="mat-subheading">Professor: {{ data.deadline }}</mat-label>
+  </div>
+  <div class="button-section">
+    <button mat-button (click)="onRequestCourseJoin()">Send request</button>
+    <button mat-button [mat-dialog-close]="data.newTask">Close</button>
+  </div>
+</mat-dialog-actions>
