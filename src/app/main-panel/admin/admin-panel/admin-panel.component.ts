@@ -14,6 +14,7 @@ export interface addTaskDialogData {
   newTask: string;
   deadline: string;
   description: string;
+  status: string;
   attachments: File[];
 }
 

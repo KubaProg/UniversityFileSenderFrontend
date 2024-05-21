@@ -1,0 +1,54 @@
+<mat-dialog-content>
+  <div class="task-detail">
+    <mat-label>Task name:</mat-label>
+    <span>{{ data.newTask }}</span>
+  </div>
+
+  <div class="task-detail">
+    <mat-label>Task deadline:</mat-label>
+    <span>{{ data.deadline | date }}</span>
+  </div>
+
+  <div class="task-detail">
+    <mat-label>Task description:</mat-label>
+    <span>{{ data.description }}</span>
+  </div>
+
+
+  <div class="task-detail">
+    <mat-label>Task status:</mat-label>
+    <span>{{ data.status }}</span>
+  </div>
+
+  <div class="task-detail">
+    <mat-label>Source attachments:</mat-label>
+  </div>
+
+  <div *ngFor="let file of sourceAttachments; let i = index" class="attachment">
+    <mat-chip-listbox>
+      <mat-chip (click)="downloadSourceAttachment(file)">
+        {{ file.name }}
+      </mat-chip>
+    </mat-chip-listbox>
+  </div>
+
+  <div>
+    <mat-label>Your attachments</mat-label>
+    <button type="button" mat-raised-button (click)="fileInput.click()">Choose File</button>
+    <input hidden (change)="onFileSelected($event)" #fileInput type="file" multiple>
+  </div>
+
+  <div *ngFor="let file of attachments; let i = index">
+    <mat-chip-listbox>
+      <mat-chip>
+        {{ file.name }}
+        <mat-icon matChipRemove (click)="removeAttachment(i)">cancel</mat-icon>
+      </mat-chip>
+    </mat-chip-listbox>
+  </div>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button mat-button (click)="onCancelClick()">Cancel</button>
+  <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Save</button>
+</mat-dialog-actions>

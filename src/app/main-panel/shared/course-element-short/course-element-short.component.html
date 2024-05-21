@@ -1,12 +1,25 @@
 <div class="course-element">
-  <h3>{{ course }}</h3>
+  <div class="course-info">
+    <div class="professor-label">
+      <mat-label>Professor</mat-label>
+    </div>
+    <h3>{{ course }}</h3>
+  </div>
   <div *ngIf="!isStudent" class="button-group">
-    <button mat-button  routerLink="/course-panel/{{ course }}">Edit</button>
+    <button mat-button routerLink="/course-panel/{{ course }}">Edit</button>
     <button mat-button (click)="openDeleteCourseModal()">Delete</button>
   </div>
+
+  <div *ngIf="isStudent && !findMode" class="button-group">
+    <button mat-button routerLink="/student-course-panel/{{ course }}">
+      <mat-icon fontIcon="menu"></mat-icon>
+    </button>
+  </div>
+
   <div *ngIf="isStudent && findMode" class="button-group">
     <button mat-button (click)="openJoinCourseModal(course)">
       <mat-icon fontIcon="add"></mat-icon>
     </button>
   </div>
 </div>
+

@@ -8,7 +8,6 @@
     <input matInput [(ngModel)]="searchTerm" (input)="filterCourses()" />
   </mat-form-field>
 
-  <!-- Course List -->
   <app-course-element-short
     *ngFor="let course of filteredCourses"
     [course]="course"

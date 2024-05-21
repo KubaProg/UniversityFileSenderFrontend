@@ -10,6 +10,7 @@ import {
 import {
   DeleteCourseModalComponent
 } from "../../admin/admin-panel/modals/delete-course-modal/delete-course-modal.component";
+import {MatLabel} from "@angular/material/form-field";
 
 @Component({
   selector: 'app-course-element-short',
@@ -18,7 +19,8 @@ import {
     MatButton,
     NgIf,
     RouterLink,
-    MatIcon
+    MatIcon,
+    MatLabel
   ],
   templateUrl: './course-element-short.component.html',
   styleUrl: './course-element-short.component.scss'
