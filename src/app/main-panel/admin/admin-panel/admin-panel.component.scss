@@ -1,19 +1,20 @@
 .content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
+  display: flex; /* Enables flexbox layout */
+  flex-direction: column; /* Arranges children in a column */
+  align-items: center; /* Centers children horizontally */
+  justify-content: flex-start; /* Aligns children at the top */
   margin: 20px;
   padding-bottom: 60px;
   height: calc(100vh - 120px);
   overflow-y: auto;
 }
 
-
-
 .action-button {
   padding: 10px;
-  align-self: center;
   margin-bottom: 20px;
   background-color: #8faad6;
+}
+
+h2 {
+  margin: 20px 0;
 }
