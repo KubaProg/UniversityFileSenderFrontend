@@ -69,7 +69,7 @@ paths:
           content:
             "*/*":
               schema:
-                type: object
+                type:
         '201':
           description: Created
         '401':
