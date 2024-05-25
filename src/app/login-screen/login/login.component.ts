@@ -23,7 +23,6 @@ import { AuthenticationRequest } from '../../api';
     MatCard,
     ReactiveFormsModule,
   ],
-  providers: [AuthService],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
@@ -38,7 +37,7 @@ export class LoginComponent {
     private authService: AuthService
   ) {
     this.loginForm = this.fb.group({
-      email: ['', [Validators.required, Validators.email]],
+      email: ['', [Validators.required,]],
       password: ['', [Validators.required]]
     });
 
