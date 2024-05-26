@@ -10,7 +10,7 @@ interface AuthenticationResponse {
 }
 
 @Injectable({
-  providedIn: 'any',
+  providedIn: 'root',
 })
 export class AuthService {
 
@@ -21,7 +21,6 @@ export class AuthService {
     const userData = localStorage.getItem('userData');
     if (userData) {
       this.user.next(JSON.parse(userData));
-      console.log('User data loaded from local storage:', JSON.parse(userData));
     }
   }
 
@@ -49,7 +48,7 @@ export class AuthService {
 
   setUserInStorage(user: UserDto, token: string): void {
     localStorage.setItem('userData', JSON.stringify(user));
-    localStorage.setItem('jwtToken', token); // Store the token as string
+    localStorage.setItem('jwtToken', token);
   }
 
   logoutUser(): void {

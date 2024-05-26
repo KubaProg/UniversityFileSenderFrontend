@@ -7,6 +7,7 @@ import { TopBarComponent } from '../../../shared/top-bar/top-bar.component';
 import { FormsModule } from '@angular/forms';
 import {MatFormField, MatLabel} from "@angular/material/form-field";
 import {MatInput} from "@angular/material/input";
+import {CourseDto} from "../../../../api";
 
 @Component({
   selector: 'app-course-find',
@@ -26,13 +27,13 @@ import {MatInput} from "@angular/material/input";
   styleUrls: ['./course-find.component.scss']
 })
 export class CourseFindComponent {
-  courses = ['Course1', 'Course2', 'Course3', 'Course4', 'Course5', 'Course6', 'Course7', 'Course8', 'Course9', 'Course10'];
+  courses: CourseDto[] = [];
   searchTerm: string = '';
-  filteredCourses: string[] = this.courses;
+  filteredCourses: CourseDto[] = this.courses;
 
   filterCourses() {
     this.filteredCourses = this.courses.filter(course =>
-      course.toLowerCase().includes(this.searchTerm.toLowerCase())
+      course.courseName?.toLowerCase().includes(this.searchTerm.toLowerCase())
     );
   }
 }

@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {MatButton} from "@angular/material/button";
 import {NgIf} from "@angular/common";
 import {MatDialog} from "@angular/material/dialog";
@@ -10,7 +10,8 @@ import {
 import {
   DeleteCourseModalComponent
 } from "../../admin/admin-panel/modals/delete-course-modal/delete-course-modal.component";
-import {MatLabel} from "@angular/material/form-field";
+import {CourseControllerService, CourseDto} from "../../../api";
+import {CourseStateService} from "../../admin/admin-panel/course-panel/course-state.service";
 
 @Component({
   selector: 'app-course-element-short',
@@ -20,39 +21,58 @@ import {MatLabel} from "@angular/material/form-field";
     NgIf,
     RouterLink,
     MatIcon,
-    MatLabel
+
   ],
   templateUrl: './course-element-short.component.html',
   styleUrl: './course-element-short.component.scss'
 })
 export class CourseElementShortComponent {
 
-  @Input() course = 'Course Name'
+  @Input() course: CourseDto | undefined;
   @Input() isStudent = false;
   @Input() findMode = false;
-  name = '';
+  @Output() courseDeleted = new EventEmitter<void>();
+
+  constructor(private courseService: CourseControllerService,
+              public dialog: MatDialog, public router: Router,
+              private courseStateService: CourseStateService) {}
 
 
-  constructor(public dialog: MatDialog, public router: Router) {}
+  editCourse(course: CourseDto | undefined) {
+    this.courseStateService.updateCurrentCourse(course);
+    this.router.navigate(['/course-panel']);
+  }
 
-  openDeleteCourseModal(){
+  openDeleteCourseModal(course: CourseDto | undefined) {
     const dialogRef = this.dialog.open(DeleteCourseModalComponent, {
-      data: {name: this.name},
+      data: course  // Pass the course data into the modal
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      this.name = result;
+      if(course) {
+        if (result && course.courseName === result) {
+          if (course.id) {
+            this.courseService.deleteCourseUsingDELETE(course.id).subscribe(
+              () => {
+                console.log('Course deleted successfully');
+              },
+              error => {
+                console.error('Failed to delete course', error);
+              }
+            );
+            this.courseDeleted.emit();
+          }
+        }
+      }
     });
   }
 
-  openJoinCourseModal(course: string) {
-    const dialogRef = this.dialog.open(JoinCourseModalComponent, {
-      data: {name: this.name},
-      width: '400px'
-    });
 
-    dialogRef.afterClosed().subscribe(result => {
-      this.name = result;
+
+  openJoinCourseModal(course: CourseDto | undefined) {
+    const dialogRef = this.dialog.open(JoinCourseModalComponent, {
+      data: {course: this.course},
+      width: '400px'
     });
   }
 }

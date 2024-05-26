@@ -7,7 +7,6 @@ import {FormGroup, FormControl, ReactiveFormsModule, Validators} from '@angular/
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
 import {MatButtonModule} from "@angular/material/button";
-import {addCourseDialogData} from "../../admin-panel.component";
 
 @Component({
   selector: 'app-create-course-modal',
@@ -25,12 +24,9 @@ import {addCourseDialogData} from "../../admin-panel.component";
 export class CreateCourseModalComponent {
   courseForm: FormGroup;
 
-  constructor(
-    public dialogRef: MatDialogRef<CreateCourseModalComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: addCourseDialogData
-  ) {
+  constructor(public dialogRef: MatDialogRef<CreateCourseModalComponent>) {
     this.courseForm = new FormGroup({
-      courseName: new FormControl(this.data.name || '', Validators.required)
+      courseName: new FormControl('', Validators.required)
     });
   }
 

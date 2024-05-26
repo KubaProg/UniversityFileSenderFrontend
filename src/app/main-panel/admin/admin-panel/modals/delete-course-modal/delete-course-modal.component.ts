@@ -1,41 +1,43 @@
-import {Component, Inject} from '@angular/core';
-import {MatButton} from "@angular/material/button";
-import {
-  MAT_DIALOG_DATA,
-  MatDialogActions,
-  MatDialogClose,
-  MatDialogContent,
-  MatDialogRef
-} from "@angular/material/dialog";
+import { Component, Inject } from '@angular/core';
+import {MatDialogRef, MAT_DIALOG_DATA, MatDialogContent, MatDialogActions} from "@angular/material/dialog";
+import {FormControl, ReactiveFormsModule, Validators} from '@angular/forms';
+import { CourseDto } from "../../../../../api";
 import {MatFormField, MatLabel} from "@angular/material/form-field";
 import {MatInput} from "@angular/material/input";
-import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {addCourseDialogData} from "../../admin-panel.component";
+import {MatButton} from "@angular/material/button";
 
 @Component({
   selector: 'app-delete-course-modal',
+  templateUrl: './delete-course-modal.component.html',
+  styleUrls: ['./delete-course-modal.component.scss'],
   standalone: true,
   imports: [
-    MatButton,
-    MatDialogActions,
     MatDialogContent,
     MatFormField,
     MatInput,
-    MatLabel,
     ReactiveFormsModule,
-    MatDialogClose,
-    FormsModule
-  ],
-  templateUrl: './delete-course-modal.component.html',
-  styleUrl: './delete-course-modal.component.scss'
+    MatDialogActions,
+    MatButton,
+    MatLabel
+  ]
 })
 export class DeleteCourseModalComponent {
+  courseNameConfirm = new FormControl('', [Validators.required]);
+
   constructor(
     public dialogRef: MatDialogRef<DeleteCourseModalComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: addCourseDialogData,
+    @Inject(MAT_DIALOG_DATA) public data: CourseDto
   ) {}
 
-  onCancelCLick(): void {
+  onCancelClick(): void {
     this.dialogRef.close();
+  }
+
+  onDelete(): void {
+    if (this.courseNameConfirm.value === this.data.courseName) {
+      this.dialogRef.close(this.courseNameConfirm.value);
+    } else {
+      this.dialogRef.close();
+    }
   }
 }

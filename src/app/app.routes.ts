@@ -8,15 +8,16 @@ import {CourseFindComponent} from "./main-panel/student/student-panel/course-fin
 import {
   StudentCoursePanelComponent
 } from "./main-panel/student/student-panel/student-course-panel/student-course-panel.component";
+import {AuthGuard} from "./login-screen/auth.guard";
 
 export const routes: Routes = [
   { path: '', redirectTo: '/start', pathMatch: 'full' },
   { path: 'start', component: StartComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'admin', component: AdminPanelComponent },
-  { path: 'student', component: StudentPanelComponent },
+  { path: 'admin', component: AdminPanelComponent, canActivate: [AuthGuard], data: { roles: ['ROLE_TEACHER'] } },
+  { path: 'student', component: StudentPanelComponent, canActivate: [AuthGuard], data: { roles: ['ROLE_STUDENT'] } },
   { path: 'login/:type', component: LoginComponent },
-  { path: 'course-panel/:course', component: CoursePanelComponent },
-  { path: 'student-course-panel/:course', component: StudentCoursePanelComponent },
-  { path: 'courses', component: CourseFindComponent }
+  { path: 'course-panel', component: CoursePanelComponent, canActivate: [AuthGuard], data: { roles: ['ROLE_TEACHER','ROLE_STUDENT'] } },
+  { path: 'student-course-panel', component: StudentCoursePanelComponent, canActivate: [AuthGuard], data: { roles: ['ROLE_STUDENT'] } },
+  { path: 'courses', component: CourseFindComponent, canActivate: [AuthGuard], data: { roles: ['ROLE_STUDENT', 'ROLE_TEACHER'] } }
 ];

@@ -1,11 +1,11 @@
 <mat-dialog-content>
-  <p>Type course name to be deleted</p>
+  <p>Type the course name to be deleted:</p>
   <mat-form-field>
     <mat-label>Course name</mat-label>
-    <input matInput [(ngModel)]="data.name">
+    <input matInput [formControl]="courseNameConfirm">
   </mat-form-field>
 </mat-dialog-content>
 <mat-dialog-actions>
-  <button mat-button (click)="onCancelCLick()">Cancel</button>
-  <button mat-button [mat-dialog-close]="data.name" cdkFocusInitial>Delete</button>
+  <button mat-button (click)="onCancelClick()">Cancel</button>
+  <button mat-button (click)="onDelete()" [disabled]="courseNameConfirm.invalid || courseNameConfirm.value !== data.courseName" cdkFocusInitial>Delete</button>
 </mat-dialog-actions>

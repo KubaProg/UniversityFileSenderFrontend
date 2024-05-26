@@ -52,6 +52,59 @@ paths:
           description: Forbidden
         '404':
           description: Not Found
+    delete:
+      tags:
+        - assignment-controller
+      summary: deleteAssignment
+      operationId: deleteAssignmentUsingDELETE
+      parameters:
+        - name: assignmentId
+          in: path
+          description: assignmentId
+          required: true
+          style: simple
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+        '204':
+          description: No Content
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+  "/api/assignments/{assignmentId}/users":
+    get:
+      tags:
+        - assignment-controller
+      summary: getStudentsByAssignment
+      operationId: getStudentsByAssignmentUsingGET
+      parameters:
+        - name: assignmentId
+          in: path
+          description: assignmentId
+          required: true
+          style: simple
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            "*/*":
+              schema:
+                type: array
+                items:
+                  "$ref": "#/components/schemas/UserDto"
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
   "/api/public/login":
     post:
       tags:
@@ -69,7 +122,7 @@ paths:
           content:
             "*/*":
               schema:
-                type:
+                type: object
         '201':
           description: Created
         '401':
@@ -82,17 +135,15 @@ paths:
     get:
       tags:
         - basic-error-controller
-      summary: error
-      operationId: errorUsingGET
+      summary: errorHtml
+      operationId: errorHtmlUsingGET
       responses:
         '200':
           description: OK
           content:
-            "*/*":
+            text/html:
               schema:
-                type: object
-                additionalProperties:
-                  type: object
+                "$ref": "#/components/schemas/ModelAndView"
         '401':
           description: Unauthorized
         '403':
@@ -102,17 +153,15 @@ paths:
     put:
       tags:
         - basic-error-controller
-      summary: error
-      operationId: errorUsingPUT
+      summary: errorHtml
+      operationId: errorHtmlUsingPUT
       responses:
         '200':
           description: OK
           content:
-            "*/*":
+            text/html:
               schema:
-                type: object
-                additionalProperties:
-                  type: object
+                "$ref": "#/components/schemas/ModelAndView"
         '201':
           description: Created
         '401':
@@ -124,17 +173,15 @@ paths:
     post:
       tags:
         - basic-error-controller
-      summary: error
-      operationId: errorUsingPOST
+      summary: errorHtml
+      operationId: errorHtmlUsingPOST
       responses:
         '200':
           description: OK
           content:
-            "*/*":
+            text/html:
               schema:
-                type: object
-                additionalProperties:
-                  type: object
+                "$ref": "#/components/schemas/ModelAndView"
         '201':
           description: Created
         '401':
@@ -146,17 +193,15 @@ paths:
     delete:
       tags:
         - basic-error-controller
-      summary: error
-      operationId: errorUsingDELETE
+      summary: errorHtml
+      operationId: errorHtmlUsingDELETE
       responses:
         '200':
           description: OK
           content:
-            "*/*":
+            text/html:
               schema:
-                type: object
-                additionalProperties:
-                  type: object
+                "$ref": "#/components/schemas/ModelAndView"
         '204':
           description: No Content
         '401':
@@ -166,17 +211,15 @@ paths:
     options:
       tags:
         - basic-error-controller
-      summary: error
-      operationId: errorUsingOPTIONS
+      summary: errorHtml
+      operationId: errorHtmlUsingOPTIONS
       responses:
         '200':
           description: OK
           content:
-            "*/*":
+            text/html:
               schema:
-                type: object
-                additionalProperties:
-                  type: object
+                "$ref": "#/components/schemas/ModelAndView"
         '204':
           description: No Content
         '401':
@@ -186,17 +229,15 @@ paths:
     head:
       tags:
         - basic-error-controller
-      summary: error
-      operationId: errorUsingHEAD
+      summary: errorHtml
+      operationId: errorHtmlUsingHEAD
       responses:
         '200':
           description: OK
           content:
-            "*/*":
+            text/html:
               schema:
-                type: object
-                additionalProperties:
-                  type: object
+                "$ref": "#/components/schemas/ModelAndView"
         '204':
           description: No Content
         '401':
@@ -206,17 +247,15 @@ paths:
     patch:
       tags:
         - basic-error-controller
-      summary: error
-      operationId: errorUsingPATCH
+      summary: errorHtml
+      operationId: errorHtmlUsingPATCH
       responses:
         '200':
           description: OK
           content:
-            "*/*":
+            text/html:
               schema:
-                type: object
-                additionalProperties:
-                  type: object
+                "$ref": "#/components/schemas/ModelAndView"
         '204':
           description: No Content
         '401':
@@ -226,17 +265,15 @@ paths:
     trace:
       tags:
         - basic-error-controller
-      summary: error
-      operationId: errorUsingTRACE
+      summary: errorHtml
+      operationId: errorHtmlUsingTRACE
       responses:
         '200':
           description: OK
           content:
-            "*/*":
+            text/html:
               schema:
-                type: object
-                additionalProperties:
-                  type: object
+                "$ref": "#/components/schemas/ModelAndView"
         '204':
           description: No Content
         '401':
@@ -605,6 +642,34 @@ paths:
                 "$ref": "#/components/schemas/CourseDto"
         '201':
           description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  "/api/user/{userId}":
+    get:
+      tags:
+        - user-controller
+      summary: getUserById
+      operationId: getUserByIdUsingGET
+      parameters:
+        - name: userId
+          in: path
+          description: userId
+          required: true
+          style: simple
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/UserDto"
         '401':
           description: Unauthorized
         '403':
