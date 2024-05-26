@@ -4,12 +4,12 @@ import { AssignmentGetDto, CourseControllerService, CourseDto } from '../../../.
 import { TopBarComponent } from "../../../shared/top-bar/top-bar.component";
 import { MatList, MatListItem } from "@angular/material/list";
 import { MatButton } from "@angular/material/button";
-import {AsyncPipe, NgForOf, NgIf} from "@angular/common";
+import { AsyncPipe, NgForOf, NgIf } from "@angular/common";
 import { TaskElementShortComponent } from "../../../shared/task-element-short/task-element-short.component";
 import { NotificationShortComponent } from "../notification-short/notification-short.component";
-import { AddTaskModalComponent } from "../add-task-modal/add-task-modal.component";
 import { CourseStateService } from "./course-state.service";
-import {CustomCourseService} from "./custom-course.service";
+import { CustomCourseService } from "./custom-course.service";
+import {AddTaskModalComponent} from "../modals/add-task-modal/add-task-modal.component";
 
 @Component({
   selector: 'app-course-panel',
@@ -23,7 +23,7 @@ import {CustomCourseService} from "./custom-course.service";
     NgIf,
     TaskElementShortComponent,
     NotificationShortComponent,
-    AsyncPipe,
+    AsyncPipe
   ],
   templateUrl: './course-panel.component.html',
   styleUrls: ['./course-panel.component.scss']
@@ -43,7 +43,7 @@ export class CoursePanelComponent implements OnInit {
 
   ngOnInit() {
     this.courseStateService.currentCourse.subscribe(course => {
-      if(course){
+      if (course) {
         this.course = course;
         this.loadTasks();
       } else {
@@ -51,7 +51,6 @@ export class CoursePanelComponent implements OnInit {
       }
     });
   }
-
 
   loadTasks() {
     if (this.course?.id) {
@@ -81,4 +80,5 @@ export class CoursePanelComponent implements OnInit {
       }
     });
   }
+
 }

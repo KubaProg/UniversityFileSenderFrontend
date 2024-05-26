@@ -7,7 +7,6 @@ import {TaskElementShortComponent} from "../../../shared/task-element-short/task
 import {TopBarComponent} from "../../../shared/top-bar/top-bar.component";
 import {ActivatedRoute} from "@angular/router";
 import {MatDialog} from "@angular/material/dialog";
-import {AddTaskModalComponent} from "../../../admin/admin-panel/add-task-modal/add-task-modal.component";
 import {AssignmentGetDto} from "../../../../api";
 
 @Component({
