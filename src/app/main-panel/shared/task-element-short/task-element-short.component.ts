@@ -8,6 +8,7 @@ import {DeleteTaskModalComponent} from "../../admin/admin-panel/modals/delete-ta
 import {
   StudentEditTaskModalComponent
 } from "../../student/student-panel/modals/student-edit-task-modal/student-edit-task-modal.component";
+import {AssignmentGetDto} from "../../../api";
 
 @Component({
   selector: 'app-task-element-short',
@@ -21,7 +22,7 @@ import {
   styleUrls: ['./task-element-short.component.scss']
 })
 export class TaskElementShortComponent {
-  @Input() task = '';
+  @Input() task: AssignmentGetDto | undefined;
   @Input() isStudentMode = false;
 
   constructor(private dialog: MatDialog) {}

@@ -1,11 +1,12 @@
-import { Component } from '@angular/core';
-import {TopBarComponent} from "../../shared/top-bar/top-bar.component";
-import {CourseElementShortComponent} from "../../shared/course-element-short/course-element-short.component";
-import {MatButton} from "@angular/material/button";
-import {NgForOf} from "@angular/common";
-import {RouterLink} from "@angular/router";
-import {MatDialogActions, MatDialogClose, MatDialogContent} from "@angular/material/dialog";
-import {MatFormField} from "@angular/material/form-field";
+import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { HttpClient } from '@angular/common/http';
+import { environment } from '../../../../environment';
+import { CourseDto } from '../../../api';
+import { TopBarComponent } from '../../shared/top-bar/top-bar.component';
+import { CourseElementShortComponent } from '../../shared/course-element-short/course-element-short.component';
+import { NgForOf } from '@angular/common';
+import { MatButton } from '@angular/material/button';
 
 @Component({
   selector: 'app-student-panel',
@@ -13,18 +14,30 @@ import {MatFormField} from "@angular/material/form-field";
   imports: [
     TopBarComponent,
     CourseElementShortComponent,
-    MatButton,
     NgForOf,
-    RouterLink,
-    MatDialogContent,
-    MatFormField,
-    MatDialogActions,
-    MatDialogClose
+    MatButton
   ],
   templateUrl: './student-panel.component.html',
-  styleUrl: './student-panel.component.scss'
+  styleUrls: ['./student-panel.component.scss']
 })
-export class StudentPanelComponent {
-  courses = ['Course1', 'Course2', 'Course3', 'Course4', 'Course5', 'Course6', 'Course7', 'Course8', 'Course9', 'Course10']
+export class StudentPanelComponent implements OnInit {
+  courses: CourseDto[] = [];
+  basePath = '/api/user/current/courses'
 
+  constructor(private httpClient: HttpClient) {}
+
+  ngOnInit(): void {
+    this.loadCourses();
+  }
+
+  private loadCourses() {
+    this.httpClient.get<CourseDto[]>(environment.apiUrl + this.basePath).subscribe(
+      courses => {
+        this.courses = courses;
+      },
+      error => {
+        console.error('Error fetching courses:', error);
+      }
+    );
+  }
 }

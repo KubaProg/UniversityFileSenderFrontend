@@ -8,6 +8,7 @@ import {TopBarComponent} from "../../../shared/top-bar/top-bar.component";
 import {ActivatedRoute} from "@angular/router";
 import {MatDialog} from "@angular/material/dialog";
 import {AddTaskModalComponent} from "../../../admin/admin-panel/add-task-modal/add-task-modal.component";
+import {AssignmentGetDto} from "../../../../api";
 
 @Component({
   selector: 'app-student-course-panel',
@@ -27,7 +28,7 @@ import {AddTaskModalComponent} from "../../../admin/admin-panel/add-task-modal/a
 export class StudentCoursePanelComponent implements OnInit {
 
   course: string | null = '';
-  tasks: string[] = ["Task 1", "Task 2", "Task 3"];
+  tasks: AssignmentGetDto[] = [];
   newTask = ''
 
   constructor(private route: ActivatedRoute, private dialog: MatDialog) {}
