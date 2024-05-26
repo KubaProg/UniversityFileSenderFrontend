@@ -1,13 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { AssignmentGetDto, CourseControllerService, CourseDto } from '../../../../api';
 import { TopBarComponent } from "../../../shared/top-bar/top-bar.component";
-import {MatList, MatListItem} from "@angular/material/list";
-import {MatButton} from "@angular/material/button";
-import {NgForOf, NgIf} from "@angular/common";
-import {TaskElementShortComponent} from "../../../shared/task-element-short/task-element-short.component";
-import {MatDialog} from "@angular/material/dialog";
-import {AddTaskModalComponent} from "../add-task-modal/add-task-modal.component";
-import {NotificationShortComponent} from "../notification-short/notification-short.component";
+import { MatList, MatListItem } from "@angular/material/list";
+import { MatButton } from "@angular/material/button";
+import {AsyncPipe, NgForOf, NgIf} from "@angular/common";
+import { TaskElementShortComponent } from "../../../shared/task-element-short/task-element-short.component";
+import { NotificationShortComponent } from "../notification-short/notification-short.component";
+import { AddTaskModalComponent } from "../add-task-modal/add-task-modal.component";
+import { CourseStateService } from "./course-state.service";
+import {CustomCourseService} from "./custom-course.service";
 
 @Component({
   selector: 'app-course-panel',
@@ -21,23 +23,47 @@ import {NotificationShortComponent} from "../notification-short/notification-sho
     NgIf,
     TaskElementShortComponent,
     NotificationShortComponent,
+    AsyncPipe,
   ],
   templateUrl: './course-panel.component.html',
   styleUrls: ['./course-panel.component.scss']
 })
 export class CoursePanelComponent implements OnInit {
-  course: string | null = '';
+  course: CourseDto | undefined;
   showNotifications = false;
   notifications: string[] = ["Notification 1", "Notification 2"];
-  tasks: string[] = ["Task 1", "Task 2", "Task 3"];
-  newTask = ''
+  tasks: AssignmentGetDto[] = [];
+  newTask = '';
 
-  constructor(private route: ActivatedRoute, private dialog: MatDialog) {}
+  constructor(
+    private dialog: MatDialog,
+    private customCourseService: CustomCourseService,
+    private courseStateService: CourseStateService
+  ) {}
 
   ngOnInit() {
-    this.route.paramMap.subscribe(params => {
-      this.course = params.get('course');
+    this.courseStateService.currentCourse.subscribe(course => {
+      if(course){
+        this.course = course;
+        this.loadTasks();
+      } else {
+        console.error('No course found');
+      }
     });
+  }
+
+
+  loadTasks() {
+    if (this.course?.id) {
+      this.customCourseService.getAssignments(this.course.id).subscribe(
+        tasks => {
+          this.tasks = tasks;
+        },
+        error => {
+          console.error('Error fetching tasks:', error);
+        }
+      );
+    }
   }
 
   toggleNotifications() {
@@ -46,12 +72,13 @@ export class CoursePanelComponent implements OnInit {
 
   openCreateTaskModal() {
     const dialogRef = this.dialog.open(AddTaskModalComponent, {
-      data: {newTask: this.newTask},
+      data: { newTask: this.newTask },
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      this.newTask = result;
+      if (result) {
+        this.newTask = result;
+      }
     });
   }
-
 }

@@ -1,0 +1,17 @@
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { AssignmentGetDto } from '../../../../api';
+import {environment} from "../../../../../environment"; // Adjust path as necessary
+
+@Injectable({
+  providedIn: 'root'
+})
+export class CustomCourseService {
+  constructor(private httpClient: HttpClient) {}
+
+  getAssignments(courseId: number): Observable<AssignmentGetDto[]> {
+    const url = `${environment.apiUrl}/api/courses/${courseId}/assignments`;
+    return this.httpClient.get<AssignmentGetDto[]>(url);
+  }
+}
