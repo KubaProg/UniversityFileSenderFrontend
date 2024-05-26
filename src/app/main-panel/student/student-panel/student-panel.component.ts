@@ -4,18 +4,18 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../../environment';
 import { CourseDto } from '../../../api';
 import { TopBarComponent } from '../../shared/top-bar/top-bar.component';
-import { CourseElementShortComponent } from '../../shared/course-element-short/course-element-short.component';
 import { NgForOf } from '@angular/common';
 import { MatButton } from '@angular/material/button';
+import {CourseElementShortComponent} from "../../shared/course-element-short/course-element-short.component";
 
 @Component({
   selector: 'app-student-panel',
   standalone: true,
   imports: [
     TopBarComponent,
-    CourseElementShortComponent,
     NgForOf,
-    MatButton
+    MatButton,
+    CourseElementShortComponent
   ],
   templateUrl: './student-panel.component.html',
   styleUrls: ['./student-panel.component.scss']

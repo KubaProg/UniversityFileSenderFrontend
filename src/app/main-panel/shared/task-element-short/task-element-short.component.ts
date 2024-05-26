@@ -22,7 +22,7 @@ import { AssignmentControllerService, AssignmentGetDto } from "../../../api";
 export class TaskElementShortComponent {
   @Input() task: AssignmentGetDto | undefined;
   @Input() isStudentMode = false;
-  // @Output() taskDeleted = new EventEmitter<void>();
+  @Output() taskDeleted = new EventEmitter<void>();
 
   constructor(
     private dialog: MatDialog,
@@ -51,7 +51,7 @@ export class TaskElementShortComponent {
             this.assignmentService.deleteAssignmentUsingDELETE(task.id).subscribe(
               () => {
                 console.log('Task deleted successfully');
-                // this.taskDeleted.emit();
+                this.taskDeleted.emit();
               },
               error => {
                 console.error('Failed to delete task', error);

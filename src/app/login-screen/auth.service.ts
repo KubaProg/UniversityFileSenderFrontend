@@ -54,7 +54,7 @@ export class AuthService {
 
   logoutUser(): void {
     this.clearUserData();
-    this.user.next(null);  // Clear BehaviorSubject
+    this.user.next(null);
     this.router.navigate(['start']);
   }
 

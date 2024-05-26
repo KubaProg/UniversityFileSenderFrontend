@@ -3,5 +3,6 @@
 <div class="content">
   <button mat-button class="action-button" (click)="openCreateCourseModal()">Add New Course</button>
   <h2>Your assigned courses:</h2>
-  <app-course-element-short *ngFor="let course of courses$ | async" [course]=course></app-course-element-short>
+  <app-course-element-short (courseDeleted)="loadCourses()" *ngFor="let course of courses$ | async" [course]=course></app-course-element-short>
 </div>
+

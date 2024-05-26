@@ -1,6 +1,6 @@
 <div class="task-element">
   <div class="title-and-buttons">
-    <h3>{{ task }}</h3>
+    <h3>{{ task?.assignmentName }}</h3>
     <div *ngIf="!isStudentMode" class="button-group">
       <button mat-button  (click)="openTaskEditModal()" >Edit</button>
       <button mat-button  (click)="openDeleteTaskModal(task)">Delete </button>

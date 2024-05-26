@@ -9,7 +9,7 @@
   </div>
 
   <div class="tasks-panel">
-    <app-task-element-short *ngFor="let task of tasks" [task]="task"></app-task-element-short>
+    <app-task-element-short (taskDeleted)="loadTasks()" *ngFor="let task of tasks" [task]="task"></app-task-element-short>
   </div>
 
   <div class="action-button">
