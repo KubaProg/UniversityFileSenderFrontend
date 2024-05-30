@@ -1,16 +1,15 @@
----
 openapi: 3.0.3
 info:
   title: Api Documentation
   description: Api Documentation
-  termsOfService: urn:tos
+  termsOfService: 'urn:tos'
   contact: {}
   license:
     name: Apache 2.0
-    url: http://www.apache.org/licenses/LICENSE-2.0
+    url: 'http://www.apache.org/licenses/LICENSE-2.0'
   version: '1.0'
 servers:
-  - url: http://localhost:8080
+  - url: 'http://localhost:8080'
     description: Inferred Url
 tags:
   - name: assignment-controller
@@ -24,7 +23,7 @@ tags:
   - name: user-controller
     description: User Controller
 paths:
-  "/api/assignments/{assignmentId}":
+  '/api/assignments/{assignmentId}':
     get:
       tags:
         - assignment-controller
@@ -43,9 +42,66 @@ paths:
         '200':
           description: OK
           content:
-            "*/*":
+            '*/*':
               schema:
-                "$ref": "#/components/schemas/DetailedAssignmentDto"
+                $ref: '#/components/schemas/DetailedAssignmentDto'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    put:
+      tags:
+        - assignment-controller
+      summary: updateAssignment
+      operationId: updateAssignmentUsingPUT
+      parameters:
+        - name: assignmentId
+          in: path
+          description: assignmentId
+          required: true
+          style: simple
+          schema:
+            type: integer
+            format: int64
+        - name: assignmentName
+          in: query
+          required: true
+          style: form
+          schema:
+            maximum: 255
+            minimum: 0
+            maxLength: 255
+            minLength: 0
+            type: string
+        - name: deadlineDate
+          in: query
+          required: true
+          style: form
+          schema:
+            type: string
+            format: date-time
+        - name: description
+          in: query
+          required: true
+          style: form
+          schema:
+            type: string
+        - name: files
+          in: query
+          required: false
+          style: pipeDelimited
+          schema:
+            type: array
+            items:
+              type: string
+              format: binary
+      responses:
+        '200':
+          description: OK
+        '201':
+          description: Created
         '401':
           description: Unauthorized
         '403':
@@ -75,12 +131,12 @@ paths:
           description: Unauthorized
         '403':
           description: Forbidden
-  "/api/assignments/{assignmentId}/users":
+  '/api/assignments/{assignmentId}/users':
     get:
       tags:
         - assignment-controller
-      summary: getStudentsByAssignment
-      operationId: getStudentsByAssignmentUsingGET
+      summary: getStudentsByAssignmentId
+      operationId: getStudentsByAssignmentIdUsingGET
       parameters:
         - name: assignmentId
           in: path
@@ -94,18 +150,18 @@ paths:
         '200':
           description: OK
           content:
-            "*/*":
+            '*/*':
               schema:
                 type: array
                 items:
-                  "$ref": "#/components/schemas/UserDto"
+                  $ref: '#/components/schemas/StudentAndAssignmentStatusDto'
         '401':
           description: Unauthorized
         '403':
           description: Forbidden
         '404':
           description: Not Found
-  "/api/public/login":
+  /api/public/login:
     post:
       tags:
         - authentication-controller
@@ -115,12 +171,12 @@ paths:
         content:
           application/json:
             schema:
-              "$ref": "#/components/schemas/AuthenticationRequest"
+              $ref: '#/components/schemas/AuthenticationRequest'
       responses:
         '200':
           description: OK
           content:
-            "*/*":
+            '*/*':
               schema:
                 type: object
         '201':
@@ -131,19 +187,21 @@ paths:
           description: Forbidden
         '404':
           description: Not Found
-  "/error":
+  /error:
     get:
       tags:
         - basic-error-controller
-      summary: errorHtml
-      operationId: errorHtmlUsingGET
+      summary: error
+      operationId: errorUsingGET
       responses:
         '200':
           description: OK
           content:
-            text/html:
+            '*/*':
               schema:
-                "$ref": "#/components/schemas/ModelAndView"
+                type: object
+                additionalProperties:
+                  type: object
         '401':
           description: Unauthorized
         '403':
@@ -153,15 +211,17 @@ paths:
     put:
       tags:
         - basic-error-controller
-      summary: errorHtml
-      operationId: errorHtmlUsingPUT
+      summary: error
+      operationId: errorUsingPUT
       responses:
         '200':
           description: OK
           content:
-            text/html:
+            '*/*':
               schema:
-                "$ref": "#/components/schemas/ModelAndView"
+                type: object
+                additionalProperties:
+                  type: object
         '201':
           description: Created
         '401':
@@ -173,15 +233,17 @@ paths:
     post:
       tags:
         - basic-error-controller
-      summary: errorHtml
-      operationId: errorHtmlUsingPOST
+      summary: error
+      operationId: errorUsingPOST
       responses:
         '200':
           description: OK
           content:
-            text/html:
+            '*/*':
               schema:
-                "$ref": "#/components/schemas/ModelAndView"
+                type: object
+                additionalProperties:
+                  type: object
         '201':
           description: Created
         '401':
@@ -193,15 +255,17 @@ paths:
     delete:
       tags:
         - basic-error-controller
-      summary: errorHtml
-      operationId: errorHtmlUsingDELETE
+      summary: error
+      operationId: errorUsingDELETE
       responses:
         '200':
           description: OK
           content:
-            text/html:
+            '*/*':
               schema:
-                "$ref": "#/components/schemas/ModelAndView"
+                type: object
+                additionalProperties:
+                  type: object
         '204':
           description: No Content
         '401':
@@ -211,15 +275,17 @@ paths:
     options:
       tags:
         - basic-error-controller
-      summary: errorHtml
-      operationId: errorHtmlUsingOPTIONS
+      summary: error
+      operationId: errorUsingOPTIONS
       responses:
         '200':
           description: OK
           content:
-            text/html:
+            '*/*':
               schema:
-                "$ref": "#/components/schemas/ModelAndView"
+                type: object
+                additionalProperties:
+                  type: object
         '204':
           description: No Content
         '401':
@@ -229,15 +295,17 @@ paths:
     head:
       tags:
         - basic-error-controller
-      summary: errorHtml
-      operationId: errorHtmlUsingHEAD
+      summary: error
+      operationId: errorUsingHEAD
       responses:
         '200':
           description: OK
           content:
-            text/html:
+            '*/*':
               schema:
-                "$ref": "#/components/schemas/ModelAndView"
+                type: object
+                additionalProperties:
+                  type: object
         '204':
           description: No Content
         '401':
@@ -247,15 +315,17 @@ paths:
     patch:
       tags:
         - basic-error-controller
-      summary: errorHtml
-      operationId: errorHtmlUsingPATCH
+      summary: error
+      operationId: errorUsingPATCH
       responses:
         '200':
           description: OK
           content:
-            text/html:
+            '*/*':
               schema:
-                "$ref": "#/components/schemas/ModelAndView"
+                type: object
+                additionalProperties:
+                  type: object
         '204':
           description: No Content
         '401':
@@ -265,22 +335,24 @@ paths:
     trace:
       tags:
         - basic-error-controller
-      summary: errorHtml
-      operationId: errorHtmlUsingTRACE
+      summary: error
+      operationId: errorUsingTRACE
       responses:
         '200':
           description: OK
           content:
-            text/html:
+            '*/*':
               schema:
-                "$ref": "#/components/schemas/ModelAndView"
+                type: object
+                additionalProperties:
+                  type: object
         '204':
           description: No Content
         '401':
           description: Unauthorized
         '403':
           description: Forbidden
-  "/api/courses/{courseId}":
+  '/api/courses/{courseId}':
     delete:
       tags:
         - course-controller
@@ -304,7 +376,7 @@ paths:
           description: Unauthorized
         '403':
           description: Forbidden
-  "/api/courses/{courseId}/assignments":
+  '/api/courses/{courseId}/assignments':
     get:
       tags:
         - course-controller
@@ -323,18 +395,78 @@ paths:
         '200':
           description: OK
           content:
-            "*/*":
+            '*/*':
               schema:
                 type: array
                 items:
-                  "$ref": "#/components/schemas/AssignmentGetDto"
+                  $ref: '#/components/schemas/AssignmentGetDto'
         '401':
           description: Unauthorized
         '403':
           description: Forbidden
         '404':
           description: Not Found
-  "/api/user/current":
+    post:
+      tags:
+        - course-controller
+      summary: saveAssignment
+      operationId: saveAssignmentUsingPOST
+      parameters:
+        - name: courseId
+          in: path
+          description: courseId
+          required: true
+          style: simple
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              required:
+                - assignmentName
+                - deadlineDate
+                - description
+              type: object
+              properties:
+                assignmentName:
+                  type: string
+                deadlineDate:
+                  type: string
+                  format: date-time
+                description:
+                  type: string
+                files:
+                  type: array
+                  items:
+                    type: string
+                    format: binary
+            encoding:
+              deadlineDate:
+                contentType: text/plain
+              description:
+                contentType: text/plain
+              files:
+                contentType: text/plain
+              assignmentName:
+                contentType: text/plain
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/AssignmentGetDto'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /api/users/current:
     get:
       tags:
         - user-controller
@@ -353,7 +485,7 @@ paths:
           style: form
           schema:
             type: boolean
-        - name: authorities[0].authority
+        - name: 'authorities[0].authority'
           in: query
           required: false
           style: form
@@ -427,16 +559,16 @@ paths:
         '200':
           description: OK
           content:
-            "*/*":
+            '*/*':
               schema:
-                "$ref": "#/components/schemas/UserDto"
+                $ref: '#/components/schemas/UserDto'
         '401':
           description: Unauthorized
         '403':
           description: Forbidden
         '404':
           description: Not Found
-  "/api/user/current/courses":
+  /api/users/current/courses:
     get:
       tags:
         - user-controller
@@ -455,7 +587,7 @@ paths:
           style: form
           schema:
             type: boolean
-        - name: authorities[0].authority
+        - name: 'authorities[0].authority'
           in: query
           required: false
           style: form
@@ -529,11 +661,11 @@ paths:
         '200':
           description: OK
           content:
-            "*/*":
+            '*/*':
               schema:
                 type: array
                 items:
-                  "$ref": "#/components/schemas/CourseDto"
+                  $ref: '#/components/schemas/CourseDto'
         '401':
           description: Unauthorized
         '403':
@@ -558,7 +690,7 @@ paths:
           style: form
           schema:
             type: boolean
-        - name: authorities[0].authority
+        - name: 'authorities[0].authority'
           in: query
           required: false
           style: form
@@ -632,14 +764,14 @@ paths:
         content:
           application/json:
             schema:
-              "$ref": "#/components/schemas/SaveCourseRequest"
+              $ref: '#/components/schemas/SaveCourseRequest'
       responses:
         '200':
           description: OK
           content:
-            "*/*":
+            '*/*':
               schema:
-                "$ref": "#/components/schemas/CourseDto"
+                $ref: '#/components/schemas/CourseDto'
         '201':
           description: Created
         '401':
@@ -648,7 +780,7 @@ paths:
           description: Forbidden
         '404':
           description: Not Found
-  "/api/user/{userId}":
+  '/api/users/{userId}':
     get:
       tags:
         - user-controller
@@ -667,9 +799,47 @@ paths:
         '200':
           description: OK
           content:
-            "*/*":
+            '*/*':
               schema:
-                "$ref": "#/components/schemas/UserDto"
+                $ref: '#/components/schemas/UserDto'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  '/api/users/{userId}/assignments/{assignmentId}':
+    get:
+      tags:
+        - user-controller
+      summary: downloadAssignment
+      operationId: downloadAssignmentUsingGET
+      parameters:
+        - name: userId
+          in: path
+          description: userId
+          required: true
+          style: simple
+          schema:
+            type: integer
+            format: int64
+        - name: assignmentId
+          in: path
+          description: assignmentId
+          required: true
+          style: simple
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/FileDto'
         '401':
           description: Unauthorized
         '403':
@@ -727,7 +897,7 @@ components:
         studentAssignmentRelationships:
           type: array
           items:
-            "$ref": "#/components/schemas/StudentAssignmentRelationshipDto"
+            $ref: '#/components/schemas/StudentAssignmentRelationshipDto'
     FileDto:
       title: FileDto
       type: object
@@ -823,7 +993,7 @@ components:
             - USE_PROXY
             - VARIANT_ALSO_NEGOTIATES
         view:
-          "$ref": "#/components/schemas/View"
+          $ref: '#/components/schemas/View'
         viewName:
           type: string
     SaveCourseRequest:
@@ -836,6 +1006,14 @@ components:
           maxLength: 100
           minLength: 1
           type: string
+    StudentAndAssignmentStatusDto:
+      title: StudentAndAssignmentStatusDto
+      type: object
+      properties:
+        status:
+          type: string
+        student:
+          $ref: '#/components/schemas/UserDto'
     StudentAssignmentRelationshipDto:
       title: StudentAssignmentRelationshipDto
       type: object
@@ -843,7 +1021,7 @@ components:
         files:
           type: array
           items:
-            "$ref": "#/components/schemas/FileDto"
+            $ref: '#/components/schemas/FileDto'
         id:
           type: integer
           format: int64
