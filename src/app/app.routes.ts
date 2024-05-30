@@ -18,6 +18,6 @@ export const routes: Routes = [
   { path: 'student', component: StudentPanelComponent, canActivate: [AuthGuard], data: { roles: ['ROLE_STUDENT'] } },
   { path: 'login/:type', component: LoginComponent },
   { path: 'course-panel', component: CoursePanelComponent, canActivate: [AuthGuard], data: { roles: ['ROLE_TEACHER','ROLE_STUDENT'] } },
-  { path: 'student-course-panel', component: StudentCoursePanelComponent, canActivate: [AuthGuard], data: { roles: ['ROLE_STUDENT'] } },
+  { path: 'student-course-panel/:courseId', component: StudentCoursePanelComponent, canActivate: [AuthGuard], data: { roles: ['ROLE_STUDENT'] } },
   { path: 'courses', component: CourseFindComponent, canActivate: [AuthGuard], data: { roles: ['ROLE_STUDENT', 'ROLE_TEACHER'] } }
 ];

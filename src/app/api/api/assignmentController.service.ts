@@ -21,7 +21,7 @@ import { Observable }                                        from 'rxjs';
 // @ts-ignore
 import { DetailedAssignmentDto } from '../model/detailedAssignmentDto';
 // @ts-ignore
-import { UserDto } from '../model/userDto';
+import { StudentAndAssignmentStatusDto } from '../model/studentAndAssignmentStatusDto';
 
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
@@ -209,17 +209,17 @@ export class AssignmentControllerService {
     }
 
     /**
-     * getStudentsByAssignment
+     * getStudentsByAssignmentId
      * @param assignmentId assignmentId
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getStudentsByAssignmentUsingGET(assignmentId: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<Array<UserDto>>;
-    public getStudentsByAssignmentUsingGET(assignmentId: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpResponse<Array<UserDto>>>;
-    public getStudentsByAssignmentUsingGET(assignmentId: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpEvent<Array<UserDto>>>;
-    public getStudentsByAssignmentUsingGET(assignmentId: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<any> {
+    public getStudentsByAssignmentIdUsingGET(assignmentId: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<Array<StudentAndAssignmentStatusDto>>;
+    public getStudentsByAssignmentIdUsingGET(assignmentId: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpResponse<Array<StudentAndAssignmentStatusDto>>>;
+    public getStudentsByAssignmentIdUsingGET(assignmentId: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpEvent<Array<StudentAndAssignmentStatusDto>>>;
+    public getStudentsByAssignmentIdUsingGET(assignmentId: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<any> {
         if (assignmentId === null || assignmentId === undefined) {
-            throw new Error('Required parameter assignmentId was null or undefined when calling getStudentsByAssignmentUsingGET.');
+            throw new Error('Required parameter assignmentId was null or undefined when calling getStudentsByAssignmentIdUsingGET.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -254,9 +254,98 @@ export class AssignmentControllerService {
         }
 
         let localVarPath = `/api/assignments/${this.configuration.encodeParam({name: "assignmentId", value: assignmentId, in: "path", style: "simple", explode: false, dataType: "number", dataFormat: "int64"})}/users`;
-        return this.httpClient.request<Array<UserDto>>('get', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<Array<StudentAndAssignmentStatusDto>>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
+                responseType: <any>responseType_,
+                withCredentials: this.configuration.withCredentials,
+                headers: localVarHeaders,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * updateAssignment
+     * @param assignmentId assignmentId
+     * @param assignmentName 
+     * @param deadlineDate 
+     * @param description 
+     * @param files 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public updateAssignmentUsingPUT(assignmentId: number, assignmentName: string, deadlineDate: string, description: string, files?: Array<Blob>, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
+    public updateAssignmentUsingPUT(assignmentId: number, assignmentName: string, deadlineDate: string, description: string, files?: Array<Blob>, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
+    public updateAssignmentUsingPUT(assignmentId: number, assignmentName: string, deadlineDate: string, description: string, files?: Array<Blob>, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
+    public updateAssignmentUsingPUT(assignmentId: number, assignmentName: string, deadlineDate: string, description: string, files?: Array<Blob>, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
+        if (assignmentId === null || assignmentId === undefined) {
+            throw new Error('Required parameter assignmentId was null or undefined when calling updateAssignmentUsingPUT.');
+        }
+        if (assignmentName === null || assignmentName === undefined) {
+            throw new Error('Required parameter assignmentName was null or undefined when calling updateAssignmentUsingPUT.');
+        }
+        if (deadlineDate === null || deadlineDate === undefined) {
+            throw new Error('Required parameter deadlineDate was null or undefined when calling updateAssignmentUsingPUT.');
+        }
+        if (description === null || description === undefined) {
+            throw new Error('Required parameter description was null or undefined when calling updateAssignmentUsingPUT.');
+        }
+
+        let localVarQueryParameters = new HttpParams({encoder: this.encoder});
+        if (assignmentName !== undefined && assignmentName !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>assignmentName, 'assignmentName');
+        }
+        if (deadlineDate !== undefined && deadlineDate !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>deadlineDate, 'deadlineDate');
+        }
+        if (description !== undefined && description !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>description, 'description');
+        }
+        if (files) {
+            localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+                [...files].join(COLLECTION_FORMATS['pipes']), 'files');
+        }
+
+        let localVarHeaders = this.defaultHeaders;
+
+        let localVarHttpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
+        if (localVarHttpHeaderAcceptSelected === undefined) {
+            // to determine the Accept header
+            const httpHeaderAccepts: string[] = [
+            ];
+            localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        }
+        if (localVarHttpHeaderAcceptSelected !== undefined) {
+            localVarHeaders = localVarHeaders.set('Accept', localVarHttpHeaderAcceptSelected);
+        }
+
+        let localVarHttpContext: HttpContext | undefined = options && options.context;
+        if (localVarHttpContext === undefined) {
+            localVarHttpContext = new HttpContext();
+        }
+
+
+        let responseType_: 'text' | 'json' | 'blob' = 'json';
+        if (localVarHttpHeaderAcceptSelected) {
+            if (localVarHttpHeaderAcceptSelected.startsWith('text')) {
+                responseType_ = 'text';
+            } else if (this.configuration.isJsonMime(localVarHttpHeaderAcceptSelected)) {
+                responseType_ = 'json';
+            } else {
+                responseType_ = 'blob';
+            }
+        }
+
+        let localVarPath = `/api/assignments/${this.configuration.encodeParam({name: "assignmentId", value: assignmentId, in: "path", style: "simple", explode: false, dataType: "number", dataFormat: "int64"})}`;
+        return this.httpClient.request<any>('put', `${this.configuration.basePath}${localVarPath}`,
+            {
+                context: localVarHttpContext,
+                params: localVarQueryParameters,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,

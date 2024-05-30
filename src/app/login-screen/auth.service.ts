@@ -44,7 +44,7 @@ export class AuthService {
 
   getCurrentUser(token: string): Observable<UserDto> {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-    return this.http.get<UserDto>(`${this.baseUrl}/api/user/current`, { headers });
+    return this.http.get<UserDto>(`${this.baseUrl}/api/users/current`, { headers });
   }
 
   setUserInStorage(user: UserDto, token: string): void {
@@ -54,7 +54,6 @@ export class AuthService {
 
   logoutUser(): void {
     this.clearUserData();
-    this.user.next(null);
     this.router.navigate(['start']);
   }
 

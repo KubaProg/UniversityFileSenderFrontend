@@ -18,8 +18,6 @@ import { HttpClient, HttpHeaders, HttpParams,
 import { CustomHttpParameterCodec }                          from '../encoder';
 import { Observable }                                        from 'rxjs';
 
-// @ts-ignore
-import { ModelAndView } from '../model/modelAndView';
 
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
@@ -92,14 +90,14 @@ export class BasicErrorControllerService {
     }
 
     /**
-     * errorHtml
+     * error
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public errorHtmlUsingDELETE(observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/html', context?: HttpContext}): Observable<ModelAndView>;
-    public errorHtmlUsingDELETE(observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/html', context?: HttpContext}): Observable<HttpResponse<ModelAndView>>;
-    public errorHtmlUsingDELETE(observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/html', context?: HttpContext}): Observable<HttpEvent<ModelAndView>>;
-    public errorHtmlUsingDELETE(observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'text/html', context?: HttpContext}): Observable<any> {
+    public errorUsingDELETE(observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<{ [key: string]: object; }>;
+    public errorUsingDELETE(observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpResponse<{ [key: string]: object; }>>;
+    public errorUsingDELETE(observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpEvent<{ [key: string]: object; }>>;
+    public errorUsingDELETE(observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<any> {
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -107,7 +105,7 @@ export class BasicErrorControllerService {
         if (localVarHttpHeaderAcceptSelected === undefined) {
             // to determine the Accept header
             const httpHeaderAccepts: string[] = [
-                'text/html'
+                '*/*'
             ];
             localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         }
@@ -133,7 +131,7 @@ export class BasicErrorControllerService {
         }
 
         let localVarPath = `/error`;
-        return this.httpClient.request<ModelAndView>('delete', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<{ [key: string]: object; }>('delete', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 responseType: <any>responseType_,
@@ -146,14 +144,14 @@ export class BasicErrorControllerService {
     }
 
     /**
-     * errorHtml
+     * error
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public errorHtmlUsingGET(observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/html', context?: HttpContext}): Observable<ModelAndView>;
-    public errorHtmlUsingGET(observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/html', context?: HttpContext}): Observable<HttpResponse<ModelAndView>>;
-    public errorHtmlUsingGET(observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/html', context?: HttpContext}): Observable<HttpEvent<ModelAndView>>;
-    public errorHtmlUsingGET(observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'text/html', context?: HttpContext}): Observable<any> {
+    public errorUsingGET(observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<{ [key: string]: object; }>;
+    public errorUsingGET(observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpResponse<{ [key: string]: object; }>>;
+    public errorUsingGET(observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpEvent<{ [key: string]: object; }>>;
+    public errorUsingGET(observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<any> {
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -161,7 +159,7 @@ export class BasicErrorControllerService {
         if (localVarHttpHeaderAcceptSelected === undefined) {
             // to determine the Accept header
             const httpHeaderAccepts: string[] = [
-                'text/html'
+                '*/*'
             ];
             localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         }
@@ -187,7 +185,7 @@ export class BasicErrorControllerService {
         }
 
         let localVarPath = `/error`;
-        return this.httpClient.request<ModelAndView>('get', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<{ [key: string]: object; }>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 responseType: <any>responseType_,
@@ -200,14 +198,14 @@ export class BasicErrorControllerService {
     }
 
     /**
-     * errorHtml
+     * error
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public errorHtmlUsingHEAD(observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/html', context?: HttpContext}): Observable<ModelAndView>;
-    public errorHtmlUsingHEAD(observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/html', context?: HttpContext}): Observable<HttpResponse<ModelAndView>>;
-    public errorHtmlUsingHEAD(observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/html', context?: HttpContext}): Observable<HttpEvent<ModelAndView>>;
-    public errorHtmlUsingHEAD(observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'text/html', context?: HttpContext}): Observable<any> {
+    public errorUsingHEAD(observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<{ [key: string]: object; }>;
+    public errorUsingHEAD(observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpResponse<{ [key: string]: object; }>>;
+    public errorUsingHEAD(observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpEvent<{ [key: string]: object; }>>;
+    public errorUsingHEAD(observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<any> {
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -215,7 +213,7 @@ export class BasicErrorControllerService {
         if (localVarHttpHeaderAcceptSelected === undefined) {
             // to determine the Accept header
             const httpHeaderAccepts: string[] = [
-                'text/html'
+                '*/*'
             ];
             localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         }
@@ -241,7 +239,7 @@ export class BasicErrorControllerService {
         }
 
         let localVarPath = `/error`;
-        return this.httpClient.request<ModelAndView>('head', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<{ [key: string]: object; }>('head', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 responseType: <any>responseType_,
@@ -254,14 +252,14 @@ export class BasicErrorControllerService {
     }
 
     /**
-     * errorHtml
+     * error
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public errorHtmlUsingOPTIONS(observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/html', context?: HttpContext}): Observable<ModelAndView>;
-    public errorHtmlUsingOPTIONS(observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/html', context?: HttpContext}): Observable<HttpResponse<ModelAndView>>;
-    public errorHtmlUsingOPTIONS(observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/html', context?: HttpContext}): Observable<HttpEvent<ModelAndView>>;
-    public errorHtmlUsingOPTIONS(observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'text/html', context?: HttpContext}): Observable<any> {
+    public errorUsingOPTIONS(observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<{ [key: string]: object; }>;
+    public errorUsingOPTIONS(observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpResponse<{ [key: string]: object; }>>;
+    public errorUsingOPTIONS(observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpEvent<{ [key: string]: object; }>>;
+    public errorUsingOPTIONS(observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<any> {
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -269,7 +267,7 @@ export class BasicErrorControllerService {
         if (localVarHttpHeaderAcceptSelected === undefined) {
             // to determine the Accept header
             const httpHeaderAccepts: string[] = [
-                'text/html'
+                '*/*'
             ];
             localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         }
@@ -295,7 +293,7 @@ export class BasicErrorControllerService {
         }
 
         let localVarPath = `/error`;
-        return this.httpClient.request<ModelAndView>('options', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<{ [key: string]: object; }>('options', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 responseType: <any>responseType_,
@@ -308,14 +306,14 @@ export class BasicErrorControllerService {
     }
 
     /**
-     * errorHtml
+     * error
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public errorHtmlUsingPATCH(observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/html', context?: HttpContext}): Observable<ModelAndView>;
-    public errorHtmlUsingPATCH(observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/html', context?: HttpContext}): Observable<HttpResponse<ModelAndView>>;
-    public errorHtmlUsingPATCH(observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/html', context?: HttpContext}): Observable<HttpEvent<ModelAndView>>;
-    public errorHtmlUsingPATCH(observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'text/html', context?: HttpContext}): Observable<any> {
+    public errorUsingPATCH(observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<{ [key: string]: object; }>;
+    public errorUsingPATCH(observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpResponse<{ [key: string]: object; }>>;
+    public errorUsingPATCH(observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpEvent<{ [key: string]: object; }>>;
+    public errorUsingPATCH(observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<any> {
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -323,7 +321,7 @@ export class BasicErrorControllerService {
         if (localVarHttpHeaderAcceptSelected === undefined) {
             // to determine the Accept header
             const httpHeaderAccepts: string[] = [
-                'text/html'
+                '*/*'
             ];
             localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         }
@@ -349,7 +347,7 @@ export class BasicErrorControllerService {
         }
 
         let localVarPath = `/error`;
-        return this.httpClient.request<ModelAndView>('patch', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<{ [key: string]: object; }>('patch', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 responseType: <any>responseType_,
@@ -362,14 +360,14 @@ export class BasicErrorControllerService {
     }
 
     /**
-     * errorHtml
+     * error
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public errorHtmlUsingPOST(observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/html', context?: HttpContext}): Observable<ModelAndView>;
-    public errorHtmlUsingPOST(observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/html', context?: HttpContext}): Observable<HttpResponse<ModelAndView>>;
-    public errorHtmlUsingPOST(observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/html', context?: HttpContext}): Observable<HttpEvent<ModelAndView>>;
-    public errorHtmlUsingPOST(observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'text/html', context?: HttpContext}): Observable<any> {
+    public errorUsingPOST(observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<{ [key: string]: object; }>;
+    public errorUsingPOST(observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpResponse<{ [key: string]: object; }>>;
+    public errorUsingPOST(observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpEvent<{ [key: string]: object; }>>;
+    public errorUsingPOST(observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<any> {
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -377,7 +375,7 @@ export class BasicErrorControllerService {
         if (localVarHttpHeaderAcceptSelected === undefined) {
             // to determine the Accept header
             const httpHeaderAccepts: string[] = [
-                'text/html'
+                '*/*'
             ];
             localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         }
@@ -403,7 +401,7 @@ export class BasicErrorControllerService {
         }
 
         let localVarPath = `/error`;
-        return this.httpClient.request<ModelAndView>('post', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<{ [key: string]: object; }>('post', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 responseType: <any>responseType_,
@@ -416,14 +414,14 @@ export class BasicErrorControllerService {
     }
 
     /**
-     * errorHtml
+     * error
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public errorHtmlUsingPUT(observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/html', context?: HttpContext}): Observable<ModelAndView>;
-    public errorHtmlUsingPUT(observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/html', context?: HttpContext}): Observable<HttpResponse<ModelAndView>>;
-    public errorHtmlUsingPUT(observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/html', context?: HttpContext}): Observable<HttpEvent<ModelAndView>>;
-    public errorHtmlUsingPUT(observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'text/html', context?: HttpContext}): Observable<any> {
+    public errorUsingPUT(observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<{ [key: string]: object; }>;
+    public errorUsingPUT(observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpResponse<{ [key: string]: object; }>>;
+    public errorUsingPUT(observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpEvent<{ [key: string]: object; }>>;
+    public errorUsingPUT(observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<any> {
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -431,7 +429,7 @@ export class BasicErrorControllerService {
         if (localVarHttpHeaderAcceptSelected === undefined) {
             // to determine the Accept header
             const httpHeaderAccepts: string[] = [
-                'text/html'
+                '*/*'
             ];
             localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         }
@@ -457,7 +455,7 @@ export class BasicErrorControllerService {
         }
 
         let localVarPath = `/error`;
-        return this.httpClient.request<ModelAndView>('put', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<{ [key: string]: object; }>('put', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 responseType: <any>responseType_,
@@ -470,14 +468,14 @@ export class BasicErrorControllerService {
     }
 
     /**
-     * errorHtml
+     * error
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public errorHtmlUsingTRACE(observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/html', context?: HttpContext}): Observable<ModelAndView>;
-    public errorHtmlUsingTRACE(observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/html', context?: HttpContext}): Observable<HttpResponse<ModelAndView>>;
-    public errorHtmlUsingTRACE(observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/html', context?: HttpContext}): Observable<HttpEvent<ModelAndView>>;
-    public errorHtmlUsingTRACE(observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'text/html', context?: HttpContext}): Observable<any> {
+    public errorUsingTRACE(observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<{ [key: string]: object; }>;
+    public errorUsingTRACE(observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpResponse<{ [key: string]: object; }>>;
+    public errorUsingTRACE(observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpEvent<{ [key: string]: object; }>>;
+    public errorUsingTRACE(observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<any> {
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -485,7 +483,7 @@ export class BasicErrorControllerService {
         if (localVarHttpHeaderAcceptSelected === undefined) {
             // to determine the Accept header
             const httpHeaderAccepts: string[] = [
-                'text/html'
+                '*/*'
             ];
             localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         }
@@ -511,7 +509,7 @@ export class BasicErrorControllerService {
         }
 
         let localVarPath = `/error`;
-        return this.httpClient.request<ModelAndView>('trace', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<{ [key: string]: object; }>('trace', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 responseType: <any>responseType_,

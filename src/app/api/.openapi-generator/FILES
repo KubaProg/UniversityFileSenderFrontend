@@ -19,6 +19,7 @@ model/fileDto.ts
 model/modelAndView.ts
 model/models.ts
 model/saveCourseRequest.ts
+model/studentAndAssignmentStatusDto.ts
 model/studentAssignmentRelationshipDto.ts
 model/userDto.ts
 model/view.ts

@@ -5,6 +5,7 @@ export * from './detailedAssignmentDto';
 export * from './fileDto';
 export * from './modelAndView';
 export * from './saveCourseRequest';
+export * from './studentAndAssignmentStatusDto';
 export * from './studentAssignmentRelationshipDto';
 export * from './userDto';
 export * from './view';

@@ -37,7 +37,7 @@ export interface addTaskDialogData {
 })
 export class AdminPanelComponent implements OnInit {
   courses$: Observable<CourseDto[]> | undefined;
-  basePath = '/api/user/current/courses'
+  basePath = '/api/users/current/courses'
 
   constructor(public dialog: MatDialog, private httpClient: HttpClient, private changeDetectorRef: ChangeDetectorRef) {}
 
@@ -58,7 +58,7 @@ export class AdminPanelComponent implements OnInit {
           courseName: result
         };
 
-        this.httpClient.post<CourseDto>(environment.apiUrl + `/api/user/current/courses`, courseSaveRequestBody).subscribe(
+        this.httpClient.post<CourseDto>(environment.apiUrl + this.basePath, courseSaveRequestBody).subscribe(
           () => {
             this.loadCourses();
           },

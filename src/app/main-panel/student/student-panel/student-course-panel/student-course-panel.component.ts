@@ -26,16 +26,18 @@ import {AssignmentGetDto} from "../../../../api";
 })
 export class StudentCoursePanelComponent implements OnInit {
 
-  course: string | null = '';
+  courseId: string | null = '';
   tasks: AssignmentGetDto[] = [];
   newTask = ''
 
-  constructor(private route: ActivatedRoute, private dialog: MatDialog) {}
+  constructor(private route: ActivatedRoute) {}
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
-      this.course = params.get('course');
+      this.courseId = params.get('courseId');
     });
+
+    // tutaj zaladuj taski z api
   }
 
 }

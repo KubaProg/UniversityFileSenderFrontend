@@ -11,7 +11,6 @@
     <mat-datepicker #deadlinePicker></mat-datepicker>
   </mat-form-field>
 
-
   <mat-form-field>
     <mat-label>Task description</mat-label>
     <textarea matInput formControlName="description"></textarea>
@@ -31,10 +30,11 @@
       </mat-chip>
     </mat-chip-listbox>
   </div>
-
 </mat-dialog-content>
 
 <mat-dialog-actions>
   <button mat-button (click)="onCancelClick()">Cancel</button>
-  <button mat-button [disabled]="taskForm.invalid" [mat-dialog-close]="taskForm.value" cdkFocusInitial>Save</button>
+  <button mat-button [disabled]="taskForm.invalid" (click)="onSubmit()" cdkFocusInitial>Save</button>
 </mat-dialog-actions>
+
+

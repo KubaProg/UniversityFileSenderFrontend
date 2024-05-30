@@ -15,7 +15,10 @@ import {provideNativeDateAdapter} from "@angular/material/core";
 import {MatChip, MatChipListbox, MatChipRemove} from "@angular/material/chips";
 import {NgForOf} from "@angular/common";
 import {MatIcon} from "@angular/material/icon";
-import {addTaskDialogData} from "../../admin-panel.component";
+import { addTaskDialogData } from "../../admin-panel.component";
+import { DatePipe } from '@angular/common';
+import {AssignmentService} from "../../../../../services/assignment.service";
+import {AssignmentGetDto, CourseDto} from "../../../../../api";
 
 @Component({
   selector: 'app-add-task-modal',
@@ -41,7 +44,8 @@ import {addTaskDialogData} from "../../admin-panel.component";
     MatChipRemove
   ],
   providers: [
-    provideNativeDateAdapter()
+    provideNativeDateAdapter(),
+    DatePipe
   ],
   styleUrls: ['./add-task-modal.component.scss']
 })
@@ -51,8 +55,10 @@ export class AddTaskModalComponent implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<AddTaskModalComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: addTaskDialogData,
-    private formBuilder: FormBuilder
+    @Inject(MAT_DIALOG_DATA) public data: { course: CourseDto },
+    private formBuilder: FormBuilder,
+    private assignmentService: AssignmentService,
+    private datePipe: DatePipe
   ) {}
 
   ngOnInit(): void {
@@ -68,7 +74,6 @@ export class AddTaskModalComponent implements OnInit {
     this.dialogRef.close();
   }
 
-
   onFileSelected(event: Event) {
     const inputNode = event.target as HTMLInputElement;
     if (inputNode.files && inputNode.files.length > 0) {
@@ -83,5 +88,33 @@ export class AddTaskModalComponent implements OnInit {
     this.attachments.splice(index, 1);
   }
 
+  onSubmit() {
+    const formValue = this.taskForm.value;
+    const formattedDeadline = this.datePipe.transform(formValue.deadline, 'yyyy-MM-ddTHH:mm:ss') || '';
+
+    const formData = new FormData();
+    formData.append('assignmentName', formValue.newTask);
+    formData.append('deadlineDate', formattedDeadline);
+    formData.append('description', formValue.description);
+    this.attachments.forEach(file => formData.append('files', file));
+
+
+    if(this.data.course.id){
+
+      this.assignmentService.saveAssignmentUsingPOST(
+        this.data.course.id,
+        formData
+      ).subscribe(
+        response => {
+          console.log('Assignment created successfully', response);
+          this.dialogRef.close();
+        },
+        error => {
+          console.error('Failed to create assignment', error);
+        }
+      );
+    }
+
+    }
 
 }

@@ -71,13 +71,11 @@ export class CoursePanelComponent implements OnInit {
 
   openCreateTaskModal() {
     const dialogRef = this.dialog.open(AddTaskModalComponent, {
-      data: { newTask: this.newTask },
+      data: { course: this.course },
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        this.newTask = result;
-      }
+      this.loadTasks();
     });
   }
 

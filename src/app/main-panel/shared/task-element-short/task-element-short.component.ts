@@ -31,11 +31,13 @@ export class TaskElementShortComponent {
 
   openTaskEditModal() {
     const dialogRef = this.dialog.open(EditTaskModalComponent, {
-      data: { newTask: this.task },
+      data: { assignmentData: this.task },
     });
 
+    console.log(this.task)
+
     dialogRef.afterClosed().subscribe(editedTaskResult => {
-      this.task = editedTaskResult;
+      this.taskDeleted.emit();
     });
   }
 
