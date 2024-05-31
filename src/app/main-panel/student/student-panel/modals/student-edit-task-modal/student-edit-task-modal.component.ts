@@ -1,12 +1,17 @@
 import { Component, Inject, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from "@angular/forms";
 import {
-  MAT_DIALOG_DATA, MatDialogActions, MatDialogClose, MatDialogContent,
-  MatDialogRef
-} from '@angular/material/dialog';
-import { addTaskDialogData } from '../../../../admin/admin-panel/admin-panel.component';
+  MatDialogRef,
+  MAT_DIALOG_DATA,
+  MatDialogContent,
+  MatDialogActions,
+  MatDialogClose
+} from "@angular/material/dialog";
 import {DatePipe, NgForOf} from "@angular/common";
+import { AssignmentService } from "../../../../../services/assignment.service";
+import { AssignmentGetDto } from "../../../../../api";
+import {MatChip, MatChipListbox} from "@angular/material/chips";
 import {MatButton} from "@angular/material/button";
-import {MatChip, MatChipListbox, MatChipRemove} from "@angular/material/chips";
 import {MatIcon} from "@angular/material/icon";
 import {MatLabel} from "@angular/material/form-field";
 
@@ -16,36 +21,48 @@ import {MatLabel} from "@angular/material/form-field";
   templateUrl: './student-edit-task-modal.component.html',
   styleUrls: ['./student-edit-task-modal.component.scss'],
   imports: [
-    DatePipe,
     MatDialogContent,
-    MatButton,
+    DatePipe,
     NgForOf,
     MatChip,
     MatChipListbox,
+    MatButton,
     MatIcon,
     MatDialogActions,
     MatDialogClose,
-    MatLabel,
-    MatChipRemove
-  ]
+    MatLabel
+  ],
+  providers: [DatePipe]
 })
 export class StudentEditTaskModalComponent implements OnInit {
+  taskForm!: FormGroup;
   attachments: File[] = [];
-  sourceAttachments: File[] = [];
+  sourceAttachments: any[] = []; // Add type accordingly
 
   constructor(
     public dialogRef: MatDialogRef<StudentEditTaskModalComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: addTaskDialogData
+    @Inject(MAT_DIALOG_DATA) public data: { assignmentData: AssignmentGetDto },
+    private formBuilder: FormBuilder,
+    private assignmentService: AssignmentService,
+    private datePipe: DatePipe
   ) {}
 
   ngOnInit(): void {
-    if (this.data.attachments && this.data.attachments.length > 0) {
-      this.attachments = [...this.data.attachments];
-    }
+    const assignmentData = this.data.assignmentData;
+
+    console.log(assignmentData);
+
+    this.taskForm = this.formBuilder.group({
+      newTask: [{ value: assignmentData.assignmentName || '', disabled: true }],
+      deadline: [{ value: assignmentData.deadlineDate, disabled: true }],
+      description: [{ value: assignmentData.description || '', disabled: true }],
+      attachment: [null]
+    });
 
     this.sourceAttachments = [
       new File([''], 'source1.pdf'),
       new File([''], 'source2.docx')
+      // tutaj powinien byc attachment co przyjdzie z osobnego endpintu getattachmentbyassignmentid?
     ];
   }
 
@@ -58,6 +75,8 @@ export class StudentEditTaskModalComponent implements OnInit {
     if (inputNode.files && inputNode.files.length > 0) {
       const filesArray = Array.from(inputNode.files);
       this.attachments.push(...filesArray);
+      this.taskForm.patchValue({ attachment: this.attachments });
+      this.taskForm.get('attachment')?.updateValueAndValidity();
     }
   }
 
@@ -65,13 +84,7 @@ export class StudentEditTaskModalComponent implements OnInit {
     this.attachments.splice(index, 1);
   }
 
-  downloadSourceAttachment(file: File) {
-    const url = window.URL.createObjectURL(file);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = file.name;
-    a.click();
-    window.URL.revokeObjectURL(url);
+  downloadSourceAttachment(file: any) {
+    console.log("Downloading source attachment", file);
   }
-
 }

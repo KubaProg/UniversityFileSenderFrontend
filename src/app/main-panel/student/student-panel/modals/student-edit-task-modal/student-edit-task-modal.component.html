@@ -1,23 +1,17 @@
 <mat-dialog-content>
   <div class="task-detail">
     <mat-label>Task name:</mat-label>
-    <span>{{ data.newTask }}</span>
+    <span>{{ data.assignmentData.assignmentName }}</span>
   </div>
 
   <div class="task-detail">
     <mat-label>Task deadline:</mat-label>
-    <span>{{ data.deadline | date }}</span>
+    <span>{{ data.assignmentData.deadlineDate | date }}</span>
   </div>
 
   <div class="task-detail">
     <mat-label>Task description:</mat-label>
-    <span>{{ data.description }}</span>
-  </div>
-
-
-  <div class="task-detail">
-    <mat-label>Task status:</mat-label>
-    <span>{{ data.status }}</span>
+    <span>{{ data.assignmentData.description }}</span>
   </div>
 
   <div class="task-detail">
@@ -50,5 +44,5 @@
 
 <mat-dialog-actions>
   <button mat-button (click)="onCancelClick()">Cancel</button>
-  <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Save</button>
+  <button mat-button [mat-dialog-close]="attachments" cdkFocusInitial>Save</button>
 </mat-dialog-actions>

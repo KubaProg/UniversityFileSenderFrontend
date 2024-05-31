@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {MatButton} from "@angular/material/button";
 import {MatList} from "@angular/material/list";
 import {NgForOf, NgIf} from "@angular/common";
@@ -6,8 +6,8 @@ import {NotificationShortComponent} from "../../../admin/admin-panel/notificatio
 import {TaskElementShortComponent} from "../../../shared/task-element-short/task-element-short.component";
 import {TopBarComponent} from "../../../shared/top-bar/top-bar.component";
 import {ActivatedRoute} from "@angular/router";
-import {MatDialog} from "@angular/material/dialog";
 import {AssignmentGetDto} from "../../../../api";
+import {CustomCourseService} from "../../../admin/admin-panel/course-panel/custom-course.service";
 
 @Component({
   selector: 'app-student-course-panel',
@@ -28,16 +28,32 @@ export class StudentCoursePanelComponent implements OnInit {
 
   courseId: string | null = '';
   tasks: AssignmentGetDto[] = [];
-  newTask = ''
 
-  constructor(private route: ActivatedRoute) {}
+  constructor(private route: ActivatedRoute,
+              private customCourseService: CustomCourseService) {}
 
   ngOnInit() {
+
     this.route.paramMap.subscribe(params => {
       this.courseId = params.get('courseId');
     });
 
-    // tutaj zaladuj taski z api
+    this.loadTasks();
+
+
+  }
+
+  loadTasks() {
+    if (this.courseId) {
+      this.customCourseService.getAssignments(+this.courseId).subscribe(
+        tasks => {
+          this.tasks = tasks;
+        },
+        error => {
+          console.error('Error fetching tasks:', error);
+        }
+      );
+    }
   }
 
 }

@@ -1,6 +1,7 @@
 <div class="course-element">
   <div class="course-info">
     <h3>{{ course?.courseName }}</h3>
+    <h3>Professor: {{teacher_name_surname}}</h3>
   </div>
   <div *ngIf="!isStudent" class="button-group">
     <button mat-button (click)="editCourse(course)">Edit</button>

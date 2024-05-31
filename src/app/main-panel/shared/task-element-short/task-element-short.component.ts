@@ -6,7 +6,8 @@ import { RouterLink } from "@angular/router";
 import { EditTaskModalComponent } from "../../admin/admin-panel/modals/edit-task-modal/edit-task-modal.component";
 import { DeleteTaskModalComponent } from "../../admin/admin-panel/modals/delete-task-modal/delete-task-modal.component";
 import { StudentEditTaskModalComponent } from "../../student/student-panel/modals/student-edit-task-modal/student-edit-task-modal.component";
-import { AssignmentControllerService, AssignmentGetDto } from "../../../api";
+import {AssignmentControllerService, AssignmentGetDto, UserControllerService} from "../../../api";
+import {AuthService} from "../../../login-screen/auth.service";
 
 @Component({
   selector: 'app-task-element-short',
@@ -21,18 +22,21 @@ import { AssignmentControllerService, AssignmentGetDto } from "../../../api";
 })
 export class TaskElementShortComponent {
   @Input() task: AssignmentGetDto | undefined;
+  @Input() teacherid: number | undefined;
   @Input() isStudentMode = false;
   @Output() taskDeleted = new EventEmitter<void>();
+  teacher_name_surname = '';
 
   constructor(
     private dialog: MatDialog,
-    private assignmentService: AssignmentControllerService
+    private assignmentService: AssignmentControllerService,
   ) {}
 
   openTaskEditModal() {
     const dialogRef = this.dialog.open(EditTaskModalComponent, {
       data: { assignmentData: this.task },
     });
+
 
     console.log(this.task)
 
@@ -67,11 +71,14 @@ export class TaskElementShortComponent {
 
   openStudentTaskEditModal() {
     const dialogRef = this.dialog.open(StudentEditTaskModalComponent, {
-      data: { newTask: this.task },
+      data: { assignmentData: this.task },
     });
 
-    dialogRef.afterClosed().subscribe(editedTaskResult => {
-      this.task = editedTaskResult;
+    dialogRef.afterClosed().subscribe(studentAttachments => {
+    if(studentAttachments){
+      // w requescie student_id, assignment_id, attachment
+      // ma zapisac w bazie encje File oraz STUDENT_ASSIGNMENT_RELATIONSHIP z statusem PENDING
+    }
     });
   }
 }

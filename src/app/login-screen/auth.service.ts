@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import {HttpClient, HttpContext, HttpHeaders} from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { tap, switchMap } from 'rxjs/operators';
 import { AuthenticationRequest, UserDto } from "../api";
@@ -61,4 +61,16 @@ export class AuthService {
     localStorage.removeItem('userData');
     localStorage.removeItem('jwtToken');
   }
+
+
+  public getUserById(userId: number): Observable<UserDto> {
+    const url = `${this.baseUrl}/api/users/${userId}`;
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
+    });
+
+    return this.http.get<UserDto>(url, { headers });
+  }
+
 }
