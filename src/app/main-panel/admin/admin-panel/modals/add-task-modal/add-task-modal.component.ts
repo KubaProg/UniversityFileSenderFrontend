@@ -1,10 +1,10 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import {
-  MatDialogRef,
   MAT_DIALOG_DATA,
-  MatDialogContent,
   MatDialogActions,
-  MatDialogClose
+  MatDialogClose,
+  MatDialogContent,
+  MatDialogRef
 } from '@angular/material/dialog';
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {MatFormField, MatLabel, MatSuffix} from "@angular/material/form-field";
@@ -13,12 +13,10 @@ import {MatInput} from "@angular/material/input";
 import {MatButton} from "@angular/material/button";
 import {provideNativeDateAdapter} from "@angular/material/core";
 import {MatChip, MatChipListbox, MatChipRemove} from "@angular/material/chips";
-import {NgForOf} from "@angular/common";
+import {DatePipe, NgForOf} from "@angular/common";
 import {MatIcon} from "@angular/material/icon";
-import { addTaskDialogData } from "../../admin-panel.component";
-import { DatePipe } from '@angular/common';
 import {AssignmentService} from "../../../../../services/assignment.service";
-import {AssignmentGetDto, CourseDto} from "../../../../../api";
+import {CourseDto} from "../../../../../api";
 
 @Component({
   selector: 'app-add-task-modal',
@@ -96,11 +94,15 @@ export class AddTaskModalComponent implements OnInit {
     formData.append('assignmentName', formValue.newTask);
     formData.append('deadlineDate', formattedDeadline);
     formData.append('description', formValue.description);
-    this.attachments.forEach(file => formData.append('files', file));
 
+    // Check if attachments exist and append, otherwise send an empty list
+    if (this.attachments && this.attachments.length > 0) {
+      this.attachments.forEach(file => formData.append('files', file));
+    } else {
+      formData.append('files', new Blob());
+    }
 
     if(this.data.course.id){
-
       this.assignmentService.saveAssignmentUsingPOST(
         this.data.course.id,
         formData
@@ -114,7 +116,7 @@ export class AddTaskModalComponent implements OnInit {
         }
       );
     }
+  }
 
-    }
 
 }

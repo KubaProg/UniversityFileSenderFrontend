@@ -1,6 +1,7 @@
 export * from './assignmentGetDto';
 export * from './authenticationRequest';
 export * from './courseDto';
+export * from './courseEnrollmentDetailsDto';
 export * from './detailedAssignmentDto';
 export * from './fileDto';
 export * from './modelAndView';

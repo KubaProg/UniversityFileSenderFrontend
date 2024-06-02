@@ -37,7 +37,7 @@ import {MatLabel} from "@angular/material/form-field";
 export class StudentEditTaskModalComponent implements OnInit {
   taskForm!: FormGroup;
   attachments: File[] = [];
-  sourceAttachments: any[] = []; // Add type accordingly
+  sourceAttachments: any[] = [];
 
   constructor(
     public dialogRef: MatDialogRef<StudentEditTaskModalComponent>,
@@ -85,6 +85,11 @@ export class StudentEditTaskModalComponent implements OnInit {
   }
 
   downloadSourceAttachment(file: any) {
-    console.log("Downloading source attachment", file);
+    const url = URL.createObjectURL(file);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = file.name;
+    a.click();
+    URL.revokeObjectURL(url);
   }
 }

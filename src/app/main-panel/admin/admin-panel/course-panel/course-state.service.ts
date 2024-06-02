@@ -18,13 +18,10 @@ export class CourseStateService {
     }
   }
 
-  clearCurrentCourse() {
-    localStorage.removeItem('currentCourse');
-    this.courseSubject.next(null);
-  }
-
   private loadInitialCourse(): CourseDto | null {
     const courseJson = localStorage.getItem('currentCourse');
     return courseJson ? JSON.parse(courseJson) : null;
   }
+
+
 }

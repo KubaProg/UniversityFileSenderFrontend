@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { AssignmentGetDto, CourseControllerService, CourseDto } from '../../../../api';
+import {AssignmentGetDto, CourseDto, CourseEnrollmentDetailsDto} from '../../../../api';
 import { TopBarComponent } from "../../../shared/top-bar/top-bar.component";
 import { MatList, MatListItem } from "@angular/material/list";
 import { MatButton } from "@angular/material/button";
@@ -31,17 +31,17 @@ import {AddTaskModalComponent} from "../modals/add-task-modal/add-task-modal.com
 export class CoursePanelComponent implements OnInit {
   course: CourseDto | undefined;
   showNotifications = false;
-  notifications: string[] = ["Notification 1", "Notification 2"];
+  notifications: CourseEnrollmentDetailsDto[] = [];
   tasks: AssignmentGetDto[] = [];
-  newTask = '';
 
   constructor(
     private dialog: MatDialog,
     private customCourseService: CustomCourseService,
-    private courseStateService: CourseStateService
+    private courseStateService: CourseStateService,
   ) {}
 
   ngOnInit() {
+
     this.courseStateService.currentCourse.subscribe(course => {
       if (course) {
         this.course = course;
@@ -50,6 +50,22 @@ export class CoursePanelComponent implements OnInit {
         console.error('No course found');
       }
     });
+
+    this.loadPendingEnrollments();
+
+  }
+
+  loadPendingEnrollments(): void {
+    if (this.course?.id) {
+      this.customCourseService.getPendingEnrollments(this.course.id).subscribe(
+        notifications => {
+          this.notifications = notifications;
+        },
+        error => {
+          console.error('Error fetching notifications:', error);
+        }
+      );
+    }
   }
 
   loadTasks() {
@@ -63,6 +79,10 @@ export class CoursePanelComponent implements OnInit {
         }
       );
     }
+  }
+
+  onEnrollmentAccepted(enrollmentId: number): void {
+    this.notifications = this.notifications.filter(notification => notification.enrollmentId !== enrollmentId);
   }
 
   toggleNotifications() {

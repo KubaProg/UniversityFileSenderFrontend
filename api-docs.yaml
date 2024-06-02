@@ -20,6 +20,8 @@ tags:
     description: Basic Error Controller
   - name: course-controller
     description: Course Controller
+  - name: course-enrollment-controller
+    description: Course Enrollment Controller
   - name: user-controller
     description: User Controller
 paths:
@@ -191,17 +193,15 @@ paths:
     get:
       tags:
         - basic-error-controller
-      summary: error
-      operationId: errorUsingGET
+      summary: errorHtml
+      operationId: errorHtmlUsingGET
       responses:
         '200':
           description: OK
           content:
-            '*/*':
+            text/html:
               schema:
-                type: object
-                additionalProperties:
-                  type: object
+                $ref: '#/components/schemas/ModelAndView'
         '401':
           description: Unauthorized
         '403':
@@ -211,17 +211,15 @@ paths:
     put:
       tags:
         - basic-error-controller
-      summary: error
-      operationId: errorUsingPUT
+      summary: errorHtml
+      operationId: errorHtmlUsingPUT
       responses:
         '200':
           description: OK
           content:
-            '*/*':
+            text/html:
               schema:
-                type: object
-                additionalProperties:
-                  type: object
+                $ref: '#/components/schemas/ModelAndView'
         '201':
           description: Created
         '401':
@@ -233,17 +231,15 @@ paths:
     post:
       tags:
         - basic-error-controller
-      summary: error
-      operationId: errorUsingPOST
+      summary: errorHtml
+      operationId: errorHtmlUsingPOST
       responses:
         '200':
           description: OK
           content:
-            '*/*':
+            text/html:
               schema:
-                type: object
-                additionalProperties:
-                  type: object
+                $ref: '#/components/schemas/ModelAndView'
         '201':
           description: Created
         '401':
@@ -255,17 +251,15 @@ paths:
     delete:
       tags:
         - basic-error-controller
-      summary: error
-      operationId: errorUsingDELETE
+      summary: errorHtml
+      operationId: errorHtmlUsingDELETE
       responses:
         '200':
           description: OK
           content:
-            '*/*':
+            text/html:
               schema:
-                type: object
-                additionalProperties:
-                  type: object
+                $ref: '#/components/schemas/ModelAndView'
         '204':
           description: No Content
         '401':
@@ -275,17 +269,15 @@ paths:
     options:
       tags:
         - basic-error-controller
-      summary: error
-      operationId: errorUsingOPTIONS
+      summary: errorHtml
+      operationId: errorHtmlUsingOPTIONS
       responses:
         '200':
           description: OK
           content:
-            '*/*':
+            text/html:
               schema:
-                type: object
-                additionalProperties:
-                  type: object
+                $ref: '#/components/schemas/ModelAndView'
         '204':
           description: No Content
         '401':
@@ -295,17 +287,15 @@ paths:
     head:
       tags:
         - basic-error-controller
-      summary: error
-      operationId: errorUsingHEAD
+      summary: errorHtml
+      operationId: errorHtmlUsingHEAD
       responses:
         '200':
           description: OK
           content:
-            '*/*':
+            text/html:
               schema:
-                type: object
-                additionalProperties:
-                  type: object
+                $ref: '#/components/schemas/ModelAndView'
         '204':
           description: No Content
         '401':
@@ -315,17 +305,15 @@ paths:
     patch:
       tags:
         - basic-error-controller
-      summary: error
-      operationId: errorUsingPATCH
+      summary: errorHtml
+      operationId: errorHtmlUsingPATCH
       responses:
         '200':
           description: OK
           content:
-            '*/*':
+            text/html:
               schema:
-                type: object
-                additionalProperties:
-                  type: object
+                $ref: '#/components/schemas/ModelAndView'
         '204':
           description: No Content
         '401':
@@ -335,17 +323,15 @@ paths:
     trace:
       tags:
         - basic-error-controller
-      summary: error
-      operationId: errorUsingTRACE
+      summary: errorHtml
+      operationId: errorHtmlUsingTRACE
       responses:
         '200':
           description: OK
           content:
-            '*/*':
+            text/html:
               schema:
-                type: object
-                additionalProperties:
-                  type: object
+                $ref: '#/components/schemas/ModelAndView'
         '204':
           description: No Content
         '401':
@@ -458,6 +444,170 @@ paths:
             '*/*':
               schema:
                 $ref: '#/components/schemas/AssignmentGetDto'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  '/api/courses/{courseId}/course-enrollments':
+    post:
+      tags:
+        - course-controller
+      summary: createPendingEnrollment
+      operationId: createPendingEnrollmentUsingPOST
+      parameters:
+        - name: accountNonExpired
+          in: query
+          required: false
+          style: form
+          schema:
+            type: boolean
+        - name: accountNonLocked
+          in: query
+          required: false
+          style: form
+          schema:
+            type: boolean
+        - name: 'authorities[0].authority'
+          in: query
+          required: false
+          style: form
+          schema:
+            type: string
+        - name: courseId
+          in: path
+          description: courseId
+          required: true
+          style: simple
+          schema:
+            type: integer
+            format: int64
+        - name: credentialsNonExpired
+          in: query
+          required: false
+          style: form
+          schema:
+            type: boolean
+        - name: enabled
+          in: query
+          required: false
+          style: form
+          schema:
+            type: boolean
+        - name: firstName
+          in: query
+          required: true
+          style: form
+          schema:
+            maximum: 100
+            minimum: 1
+            maxLength: 100
+            minLength: 1
+            type: string
+        - name: id
+          in: query
+          required: false
+          style: form
+          schema:
+            type: integer
+            format: int64
+        - name: lastName
+          in: query
+          required: true
+          style: form
+          schema:
+            maximum: 100
+            minimum: 1
+            maxLength: 100
+            minLength: 1
+            type: string
+        - name: password
+          in: query
+          required: true
+          style: form
+          schema:
+            type: string
+        - name: role
+          in: query
+          required: true
+          style: form
+          schema:
+            type: string
+            enum:
+              - ROLE_STUDENT
+              - ROLE_TEACHER
+        - name: username
+          in: query
+          required: true
+          style: form
+          schema:
+            maximum: 100
+            minimum: 8
+            maxLength: 100
+            minLength: 8
+            type: string
+      responses:
+        '200':
+          description: OK
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  '/api/courses/{courseId}/course-enrollments/pending':
+    get:
+      tags:
+        - course-controller
+      summary: getPendingEnrollmentsForCourse
+      operationId: getPendingEnrollmentsForCourseUsingGET
+      parameters:
+        - name: courseId
+          in: path
+          description: courseId
+          required: true
+          style: simple
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CourseEnrollmentDetailsDto'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  '/api/course-enrollments/{enrollmentId}/accept':
+    put:
+      tags:
+        - course-enrollment-controller
+      summary: acceptEnrollment
+      operationId: acceptEnrollmentUsingPUT
+      parameters:
+        - name: enrollmentId
+          in: path
+          description: enrollmentId
+          required: true
+          style: simple
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
         '201':
           description: Created
         '401':
@@ -780,6 +930,110 @@ paths:
           description: Forbidden
         '404':
           description: Not Found
+  /api/users/current/courses/pending:
+    get:
+      tags:
+        - user-controller
+      summary: getPendingCoursesforCurrentStudent
+      operationId: getPendingCoursesforCurrentStudentUsingGET
+      parameters:
+        - name: accountNonExpired
+          in: query
+          required: false
+          style: form
+          schema:
+            type: boolean
+        - name: accountNonLocked
+          in: query
+          required: false
+          style: form
+          schema:
+            type: boolean
+        - name: 'authorities[0].authority'
+          in: query
+          required: false
+          style: form
+          schema:
+            type: string
+        - name: credentialsNonExpired
+          in: query
+          required: false
+          style: form
+          schema:
+            type: boolean
+        - name: enabled
+          in: query
+          required: false
+          style: form
+          schema:
+            type: boolean
+        - name: firstName
+          in: query
+          required: true
+          style: form
+          schema:
+            maximum: 100
+            minimum: 1
+            maxLength: 100
+            minLength: 1
+            type: string
+        - name: id
+          in: query
+          required: false
+          style: form
+          schema:
+            type: integer
+            format: int64
+        - name: lastName
+          in: query
+          required: true
+          style: form
+          schema:
+            maximum: 100
+            minimum: 1
+            maxLength: 100
+            minLength: 1
+            type: string
+        - name: password
+          in: query
+          required: true
+          style: form
+          schema:
+            type: string
+        - name: role
+          in: query
+          required: true
+          style: form
+          schema:
+            type: string
+            enum:
+              - ROLE_STUDENT
+              - ROLE_TEACHER
+        - name: username
+          in: query
+          required: true
+          style: form
+          schema:
+            maximum: 100
+            minimum: 8
+            maxLength: 100
+            minLength: 8
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CourseDto'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
   '/api/users/{userId}':
     get:
       tags:
@@ -881,6 +1135,25 @@ components:
         teacherId:
           type: integer
           format: int64
+    CourseEnrollmentDetailsDto:
+      title: CourseEnrollmentDetailsDto
+      type: object
+      properties:
+        courseId:
+          type: integer
+          format: int64
+        enrollmentId:
+          type: integer
+          format: int64
+        status:
+          type: string
+        userFirstName:
+          type: string
+        userId:
+          type: integer
+          format: int64
+        userLastName:
+          type: string
     DetailedAssignmentDto:
       title: DetailedAssignmentDto
       type: object

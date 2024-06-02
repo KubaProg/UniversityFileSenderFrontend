@@ -4,7 +4,7 @@
   <div class="notification-panel">
     <button mat-raised-button (click)="toggleNotifications()">Requests</button>
     <mat-list *ngIf="showNotifications">
-      <app-notification-short *ngFor="let notification of notifications" [notification]="notification"></app-notification-short>
+      <app-notification-short  (enrollmentAccepted)="onEnrollmentAccepted($event)" *ngFor="let notification of notifications" [notification]="notification"></app-notification-short>
     </mat-list>
   </div>
 

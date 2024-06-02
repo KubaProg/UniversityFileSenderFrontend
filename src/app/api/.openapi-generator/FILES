@@ -6,6 +6,7 @@ api/assignmentController.service.ts
 api/authenticationController.service.ts
 api/basicErrorController.service.ts
 api/courseController.service.ts
+api/courseEnrollmentController.service.ts
 api/userController.service.ts
 configuration.ts
 encoder.ts
@@ -14,6 +15,7 @@ index.ts
 model/assignmentGetDto.ts
 model/authenticationRequest.ts
 model/courseDto.ts
+model/courseEnrollmentDetailsDto.ts
 model/detailedAssignmentDto.ts
 model/fileDto.ts
 model/modelAndView.ts

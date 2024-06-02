@@ -1,4 +1,6 @@
-<mat-list-item>
-  {{ notification }}
-<button mat-raised-button (click)="onStudentAccept()">Accept</button>
+<mat-list-item class="notification-item">
+  <div class="notification-content">
+    {{ notification?.userFirstName }} {{ notification?.userLastName }} has requested to join your course
+  </div>
+  <button mat-raised-button color="primary" (click)="onStudentAccept()">Accept</button>
 </mat-list-item>

@@ -1,9 +1,26 @@
 mat-list-item {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 10px;
+  margin: 5px 0;
+  border-radius: 4px;
+  background-color: #f9f9f9;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-left: 4px solid #8faad6;
+  min-height: 100px;
+
+  .notification-content {
+    margin-bottom: 10px;
+    word-wrap: break-word;
+  }
 
   button {
-    margin-left: auto;
+    align-self: flex-start;
+    background-color: #4caf50;
+    color: white;
+    &:hover {
+      background-color: #45a045;
+    }
   }
 }

@@ -6,6 +6,7 @@ import { AssignmentControllerService } from './api/assignmentController.service'
 import { AuthenticationControllerService } from './api/authenticationController.service';
 import { BasicErrorControllerService } from './api/basicErrorController.service';
 import { CourseControllerService } from './api/courseController.service';
+import { CourseEnrollmentControllerService } from './api/courseEnrollmentController.service';
 import { UserControllerService } from './api/userController.service';
 
 @NgModule({

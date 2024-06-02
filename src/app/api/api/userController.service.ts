@@ -414,6 +414,133 @@ export class UserControllerService {
     }
 
     /**
+     * getPendingCoursesforCurrentStudent
+     * @param firstName 
+     * @param lastName 
+     * @param password 
+     * @param role 
+     * @param username 
+     * @param accountNonExpired 
+     * @param accountNonLocked 
+     * @param authorities0Authority 
+     * @param credentialsNonExpired 
+     * @param enabled 
+     * @param id 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public getPendingCoursesforCurrentStudentUsingGET(firstName: string, lastName: string, password: string, role: 'ROLE_STUDENT' | 'ROLE_TEACHER', username: string, accountNonExpired?: boolean, accountNonLocked?: boolean, authorities0Authority?: string, credentialsNonExpired?: boolean, enabled?: boolean, id?: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<Array<CourseDto>>;
+    public getPendingCoursesforCurrentStudentUsingGET(firstName: string, lastName: string, password: string, role: 'ROLE_STUDENT' | 'ROLE_TEACHER', username: string, accountNonExpired?: boolean, accountNonLocked?: boolean, authorities0Authority?: string, credentialsNonExpired?: boolean, enabled?: boolean, id?: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpResponse<Array<CourseDto>>>;
+    public getPendingCoursesforCurrentStudentUsingGET(firstName: string, lastName: string, password: string, role: 'ROLE_STUDENT' | 'ROLE_TEACHER', username: string, accountNonExpired?: boolean, accountNonLocked?: boolean, authorities0Authority?: string, credentialsNonExpired?: boolean, enabled?: boolean, id?: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpEvent<Array<CourseDto>>>;
+    public getPendingCoursesforCurrentStudentUsingGET(firstName: string, lastName: string, password: string, role: 'ROLE_STUDENT' | 'ROLE_TEACHER', username: string, accountNonExpired?: boolean, accountNonLocked?: boolean, authorities0Authority?: string, credentialsNonExpired?: boolean, enabled?: boolean, id?: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<any> {
+        if (firstName === null || firstName === undefined) {
+            throw new Error('Required parameter firstName was null or undefined when calling getPendingCoursesforCurrentStudentUsingGET.');
+        }
+        if (lastName === null || lastName === undefined) {
+            throw new Error('Required parameter lastName was null or undefined when calling getPendingCoursesforCurrentStudentUsingGET.');
+        }
+        if (password === null || password === undefined) {
+            throw new Error('Required parameter password was null or undefined when calling getPendingCoursesforCurrentStudentUsingGET.');
+        }
+        if (role === null || role === undefined) {
+            throw new Error('Required parameter role was null or undefined when calling getPendingCoursesforCurrentStudentUsingGET.');
+        }
+        if (username === null || username === undefined) {
+            throw new Error('Required parameter username was null or undefined when calling getPendingCoursesforCurrentStudentUsingGET.');
+        }
+
+        let localVarQueryParameters = new HttpParams({encoder: this.encoder});
+        if (accountNonExpired !== undefined && accountNonExpired !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>accountNonExpired, 'accountNonExpired');
+        }
+        if (accountNonLocked !== undefined && accountNonLocked !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>accountNonLocked, 'accountNonLocked');
+        }
+        if (authorities0Authority !== undefined && authorities0Authority !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>authorities0Authority, 'authorities[0].authority');
+        }
+        if (credentialsNonExpired !== undefined && credentialsNonExpired !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>credentialsNonExpired, 'credentialsNonExpired');
+        }
+        if (enabled !== undefined && enabled !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>enabled, 'enabled');
+        }
+        if (firstName !== undefined && firstName !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>firstName, 'firstName');
+        }
+        if (id !== undefined && id !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>id, 'id');
+        }
+        if (lastName !== undefined && lastName !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>lastName, 'lastName');
+        }
+        if (password !== undefined && password !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>password, 'password');
+        }
+        if (role !== undefined && role !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>role, 'role');
+        }
+        if (username !== undefined && username !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>username, 'username');
+        }
+
+        let localVarHeaders = this.defaultHeaders;
+
+        let localVarHttpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
+        if (localVarHttpHeaderAcceptSelected === undefined) {
+            // to determine the Accept header
+            const httpHeaderAccepts: string[] = [
+                '*/*'
+            ];
+            localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        }
+        if (localVarHttpHeaderAcceptSelected !== undefined) {
+            localVarHeaders = localVarHeaders.set('Accept', localVarHttpHeaderAcceptSelected);
+        }
+
+        let localVarHttpContext: HttpContext | undefined = options && options.context;
+        if (localVarHttpContext === undefined) {
+            localVarHttpContext = new HttpContext();
+        }
+
+
+        let responseType_: 'text' | 'json' | 'blob' = 'json';
+        if (localVarHttpHeaderAcceptSelected) {
+            if (localVarHttpHeaderAcceptSelected.startsWith('text')) {
+                responseType_ = 'text';
+            } else if (this.configuration.isJsonMime(localVarHttpHeaderAcceptSelected)) {
+                responseType_ = 'json';
+            } else {
+                responseType_ = 'blob';
+            }
+        }
+
+        let localVarPath = `/api/users/current/courses/pending`;
+        return this.httpClient.request<Array<CourseDto>>('get', `${this.configuration.basePath}${localVarPath}`,
+            {
+                context: localVarHttpContext,
+                params: localVarQueryParameters,
+                responseType: <any>responseType_,
+                withCredentials: this.configuration.withCredentials,
+                headers: localVarHeaders,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
      * getUserById
      * @param userId userId
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.

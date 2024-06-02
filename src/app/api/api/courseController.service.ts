@@ -20,6 +20,8 @@ import { Observable }                                        from 'rxjs';
 
 // @ts-ignore
 import { AssignmentGetDto } from '../model/assignmentGetDto';
+// @ts-ignore
+import { CourseEnrollmentDetailsDto } from '../model/courseEnrollmentDetailsDto';
 
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
@@ -102,6 +104,136 @@ export class CourseControllerService {
             throw Error("key may not be null if value is not object or array");
         }
         return httpParams;
+    }
+
+    /**
+     * createPendingEnrollment
+     * @param courseId courseId
+     * @param firstName 
+     * @param lastName 
+     * @param password 
+     * @param role 
+     * @param username 
+     * @param accountNonExpired 
+     * @param accountNonLocked 
+     * @param authorities0Authority 
+     * @param credentialsNonExpired 
+     * @param enabled 
+     * @param id 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public createPendingEnrollmentUsingPOST(courseId: number, firstName: string, lastName: string, password: string, role: 'ROLE_STUDENT' | 'ROLE_TEACHER', username: string, accountNonExpired?: boolean, accountNonLocked?: boolean, authorities0Authority?: string, credentialsNonExpired?: boolean, enabled?: boolean, id?: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
+    public createPendingEnrollmentUsingPOST(courseId: number, firstName: string, lastName: string, password: string, role: 'ROLE_STUDENT' | 'ROLE_TEACHER', username: string, accountNonExpired?: boolean, accountNonLocked?: boolean, authorities0Authority?: string, credentialsNonExpired?: boolean, enabled?: boolean, id?: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
+    public createPendingEnrollmentUsingPOST(courseId: number, firstName: string, lastName: string, password: string, role: 'ROLE_STUDENT' | 'ROLE_TEACHER', username: string, accountNonExpired?: boolean, accountNonLocked?: boolean, authorities0Authority?: string, credentialsNonExpired?: boolean, enabled?: boolean, id?: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
+    public createPendingEnrollmentUsingPOST(courseId: number, firstName: string, lastName: string, password: string, role: 'ROLE_STUDENT' | 'ROLE_TEACHER', username: string, accountNonExpired?: boolean, accountNonLocked?: boolean, authorities0Authority?: string, credentialsNonExpired?: boolean, enabled?: boolean, id?: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
+        if (courseId === null || courseId === undefined) {
+            throw new Error('Required parameter courseId was null or undefined when calling createPendingEnrollmentUsingPOST.');
+        }
+        if (firstName === null || firstName === undefined) {
+            throw new Error('Required parameter firstName was null or undefined when calling createPendingEnrollmentUsingPOST.');
+        }
+        if (lastName === null || lastName === undefined) {
+            throw new Error('Required parameter lastName was null or undefined when calling createPendingEnrollmentUsingPOST.');
+        }
+        if (password === null || password === undefined) {
+            throw new Error('Required parameter password was null or undefined when calling createPendingEnrollmentUsingPOST.');
+        }
+        if (role === null || role === undefined) {
+            throw new Error('Required parameter role was null or undefined when calling createPendingEnrollmentUsingPOST.');
+        }
+        if (username === null || username === undefined) {
+            throw new Error('Required parameter username was null or undefined when calling createPendingEnrollmentUsingPOST.');
+        }
+
+        let localVarQueryParameters = new HttpParams({encoder: this.encoder});
+        if (accountNonExpired !== undefined && accountNonExpired !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>accountNonExpired, 'accountNonExpired');
+        }
+        if (accountNonLocked !== undefined && accountNonLocked !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>accountNonLocked, 'accountNonLocked');
+        }
+        if (authorities0Authority !== undefined && authorities0Authority !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>authorities0Authority, 'authorities[0].authority');
+        }
+        if (credentialsNonExpired !== undefined && credentialsNonExpired !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>credentialsNonExpired, 'credentialsNonExpired');
+        }
+        if (enabled !== undefined && enabled !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>enabled, 'enabled');
+        }
+        if (firstName !== undefined && firstName !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>firstName, 'firstName');
+        }
+        if (id !== undefined && id !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>id, 'id');
+        }
+        if (lastName !== undefined && lastName !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>lastName, 'lastName');
+        }
+        if (password !== undefined && password !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>password, 'password');
+        }
+        if (role !== undefined && role !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>role, 'role');
+        }
+        if (username !== undefined && username !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>username, 'username');
+        }
+
+        let localVarHeaders = this.defaultHeaders;
+
+        let localVarHttpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
+        if (localVarHttpHeaderAcceptSelected === undefined) {
+            // to determine the Accept header
+            const httpHeaderAccepts: string[] = [
+            ];
+            localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        }
+        if (localVarHttpHeaderAcceptSelected !== undefined) {
+            localVarHeaders = localVarHeaders.set('Accept', localVarHttpHeaderAcceptSelected);
+        }
+
+        let localVarHttpContext: HttpContext | undefined = options && options.context;
+        if (localVarHttpContext === undefined) {
+            localVarHttpContext = new HttpContext();
+        }
+
+
+        let responseType_: 'text' | 'json' | 'blob' = 'json';
+        if (localVarHttpHeaderAcceptSelected) {
+            if (localVarHttpHeaderAcceptSelected.startsWith('text')) {
+                responseType_ = 'text';
+            } else if (this.configuration.isJsonMime(localVarHttpHeaderAcceptSelected)) {
+                responseType_ = 'json';
+            } else {
+                responseType_ = 'blob';
+            }
+        }
+
+        let localVarPath = `/api/courses/${this.configuration.encodeParam({name: "courseId", value: courseId, in: "path", style: "simple", explode: false, dataType: "number", dataFormat: "int64"})}/course-enrollments`;
+        return this.httpClient.request<any>('post', `${this.configuration.basePath}${localVarPath}`,
+            {
+                context: localVarHttpContext,
+                params: localVarQueryParameters,
+                responseType: <any>responseType_,
+                withCredentials: this.configuration.withCredentials,
+                headers: localVarHeaders,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
     }
 
     /**
@@ -208,6 +340,64 @@ export class CourseControllerService {
 
         let localVarPath = `/api/courses/${this.configuration.encodeParam({name: "courseId", value: courseId, in: "path", style: "simple", explode: false, dataType: "number", dataFormat: "int64"})}/assignments`;
         return this.httpClient.request<Array<AssignmentGetDto>>('get', `${this.configuration.basePath}${localVarPath}`,
+            {
+                context: localVarHttpContext,
+                responseType: <any>responseType_,
+                withCredentials: this.configuration.withCredentials,
+                headers: localVarHeaders,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * getPendingEnrollmentsForCourse
+     * @param courseId courseId
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public getPendingEnrollmentsForCourseUsingGET(courseId: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<Array<CourseEnrollmentDetailsDto>>;
+    public getPendingEnrollmentsForCourseUsingGET(courseId: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpResponse<Array<CourseEnrollmentDetailsDto>>>;
+    public getPendingEnrollmentsForCourseUsingGET(courseId: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpEvent<Array<CourseEnrollmentDetailsDto>>>;
+    public getPendingEnrollmentsForCourseUsingGET(courseId: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<any> {
+        if (courseId === null || courseId === undefined) {
+            throw new Error('Required parameter courseId was null or undefined when calling getPendingEnrollmentsForCourseUsingGET.');
+        }
+
+        let localVarHeaders = this.defaultHeaders;
+
+        let localVarHttpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
+        if (localVarHttpHeaderAcceptSelected === undefined) {
+            // to determine the Accept header
+            const httpHeaderAccepts: string[] = [
+                '*/*'
+            ];
+            localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        }
+        if (localVarHttpHeaderAcceptSelected !== undefined) {
+            localVarHeaders = localVarHeaders.set('Accept', localVarHttpHeaderAcceptSelected);
+        }
+
+        let localVarHttpContext: HttpContext | undefined = options && options.context;
+        if (localVarHttpContext === undefined) {
+            localVarHttpContext = new HttpContext();
+        }
+
+
+        let responseType_: 'text' | 'json' | 'blob' = 'json';
+        if (localVarHttpHeaderAcceptSelected) {
+            if (localVarHttpHeaderAcceptSelected.startsWith('text')) {
+                responseType_ = 'text';
+            } else if (this.configuration.isJsonMime(localVarHttpHeaderAcceptSelected)) {
+                responseType_ = 'json';
+            } else {
+                responseType_ = 'blob';
+            }
+        }
+
+        let localVarPath = `/api/courses/${this.configuration.encodeParam({name: "courseId", value: courseId, in: "path", style: "simple", explode: false, dataType: "number", dataFormat: "int64"})}/course-enrollments/pending`;
+        return this.httpClient.request<Array<CourseEnrollmentDetailsDto>>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 responseType: <any>responseType_,
