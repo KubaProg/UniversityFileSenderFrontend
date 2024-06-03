@@ -19,6 +19,8 @@ import { CustomHttpParameterCodec }                          from '../encoder';
 import { Observable }                                        from 'rxjs';
 
 // @ts-ignore
+import { ByteArrayResource } from '../model/byteArrayResource';
+// @ts-ignore
 import { DetailedAssignmentDto } from '../model/detailedAssignmentDto';
 // @ts-ignore
 import { StudentAndAssignmentStatusDto } from '../model/studentAndAssignmentStatusDto';
@@ -151,6 +153,64 @@ export class AssignmentControllerService {
     }
 
     /**
+     * downloadAssignment
+     * @param assignmentId assignmentId
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public downloadAssignmentUsingGET(assignmentId: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<ByteArrayResource>;
+    public downloadAssignmentUsingGET(assignmentId: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpResponse<ByteArrayResource>>;
+    public downloadAssignmentUsingGET(assignmentId: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpEvent<ByteArrayResource>>;
+    public downloadAssignmentUsingGET(assignmentId: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<any> {
+        if (assignmentId === null || assignmentId === undefined) {
+            throw new Error('Required parameter assignmentId was null or undefined when calling downloadAssignmentUsingGET.');
+        }
+
+        let localVarHeaders = this.defaultHeaders;
+
+        let localVarHttpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
+        if (localVarHttpHeaderAcceptSelected === undefined) {
+            // to determine the Accept header
+            const httpHeaderAccepts: string[] = [
+                '*/*'
+            ];
+            localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        }
+        if (localVarHttpHeaderAcceptSelected !== undefined) {
+            localVarHeaders = localVarHeaders.set('Accept', localVarHttpHeaderAcceptSelected);
+        }
+
+        let localVarHttpContext: HttpContext | undefined = options && options.context;
+        if (localVarHttpContext === undefined) {
+            localVarHttpContext = new HttpContext();
+        }
+
+
+        let responseType_: 'text' | 'json' | 'blob' = 'json';
+        if (localVarHttpHeaderAcceptSelected) {
+            if (localVarHttpHeaderAcceptSelected.startsWith('text')) {
+                responseType_ = 'text';
+            } else if (this.configuration.isJsonMime(localVarHttpHeaderAcceptSelected)) {
+                responseType_ = 'json';
+            } else {
+                responseType_ = 'blob';
+            }
+        }
+
+        let localVarPath = `/api/assignments/${this.configuration.encodeParam({name: "assignmentId", value: assignmentId, in: "path", style: "simple", explode: false, dataType: "number", dataFormat: "int64"})}/download`;
+        return this.httpClient.request<ByteArrayResource>('get', `${this.configuration.basePath}${localVarPath}`,
+            {
+                context: localVarHttpContext,
+                responseType: <any>responseType_,
+                withCredentials: this.configuration.withCredentials,
+                headers: localVarHeaders,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
      * getDetailedAssignment
      * @param assignmentId assignmentId
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
@@ -257,6 +317,141 @@ export class AssignmentControllerService {
         return this.httpClient.request<Array<StudentAndAssignmentStatusDto>>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
+                responseType: <any>responseType_,
+                withCredentials: this.configuration.withCredentials,
+                headers: localVarHeaders,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * submitAssignment
+     * @param assignmentId assignmentId
+     * @param firstName 
+     * @param lastName 
+     * @param password 
+     * @param role 
+     * @param username 
+     * @param accountNonExpired 
+     * @param accountNonLocked 
+     * @param authorities0Authority 
+     * @param credentialsNonExpired 
+     * @param enabled 
+     * @param files 
+     * @param id 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public submitAssignmentUsingPUT(assignmentId: number, firstName: string, lastName: string, password: string, role: 'ROLE_STUDENT' | 'ROLE_TEACHER', username: string, accountNonExpired?: boolean, accountNonLocked?: boolean, authorities0Authority?: string, credentialsNonExpired?: boolean, enabled?: boolean, files?: Array<Blob>, id?: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
+    public submitAssignmentUsingPUT(assignmentId: number, firstName: string, lastName: string, password: string, role: 'ROLE_STUDENT' | 'ROLE_TEACHER', username: string, accountNonExpired?: boolean, accountNonLocked?: boolean, authorities0Authority?: string, credentialsNonExpired?: boolean, enabled?: boolean, files?: Array<Blob>, id?: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
+    public submitAssignmentUsingPUT(assignmentId: number, firstName: string, lastName: string, password: string, role: 'ROLE_STUDENT' | 'ROLE_TEACHER', username: string, accountNonExpired?: boolean, accountNonLocked?: boolean, authorities0Authority?: string, credentialsNonExpired?: boolean, enabled?: boolean, files?: Array<Blob>, id?: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
+    public submitAssignmentUsingPUT(assignmentId: number, firstName: string, lastName: string, password: string, role: 'ROLE_STUDENT' | 'ROLE_TEACHER', username: string, accountNonExpired?: boolean, accountNonLocked?: boolean, authorities0Authority?: string, credentialsNonExpired?: boolean, enabled?: boolean, files?: Array<Blob>, id?: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
+        if (assignmentId === null || assignmentId === undefined) {
+            throw new Error('Required parameter assignmentId was null or undefined when calling submitAssignmentUsingPUT.');
+        }
+        if (firstName === null || firstName === undefined) {
+            throw new Error('Required parameter firstName was null or undefined when calling submitAssignmentUsingPUT.');
+        }
+        if (lastName === null || lastName === undefined) {
+            throw new Error('Required parameter lastName was null or undefined when calling submitAssignmentUsingPUT.');
+        }
+        if (password === null || password === undefined) {
+            throw new Error('Required parameter password was null or undefined when calling submitAssignmentUsingPUT.');
+        }
+        if (role === null || role === undefined) {
+            throw new Error('Required parameter role was null or undefined when calling submitAssignmentUsingPUT.');
+        }
+        if (username === null || username === undefined) {
+            throw new Error('Required parameter username was null or undefined when calling submitAssignmentUsingPUT.');
+        }
+
+        let localVarQueryParameters = new HttpParams({encoder: this.encoder});
+        if (accountNonExpired !== undefined && accountNonExpired !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>accountNonExpired, 'accountNonExpired');
+        }
+        if (accountNonLocked !== undefined && accountNonLocked !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>accountNonLocked, 'accountNonLocked');
+        }
+        if (authorities0Authority !== undefined && authorities0Authority !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>authorities0Authority, 'authorities[0].authority');
+        }
+        if (credentialsNonExpired !== undefined && credentialsNonExpired !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>credentialsNonExpired, 'credentialsNonExpired');
+        }
+        if (enabled !== undefined && enabled !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>enabled, 'enabled');
+        }
+        if (files) {
+            localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+                [...files].join(COLLECTION_FORMATS['pipes']), 'files');
+        }
+        if (firstName !== undefined && firstName !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>firstName, 'firstName');
+        }
+        if (id !== undefined && id !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>id, 'id');
+        }
+        if (lastName !== undefined && lastName !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>lastName, 'lastName');
+        }
+        if (password !== undefined && password !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>password, 'password');
+        }
+        if (role !== undefined && role !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>role, 'role');
+        }
+        if (username !== undefined && username !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>username, 'username');
+        }
+
+        let localVarHeaders = this.defaultHeaders;
+
+        let localVarHttpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
+        if (localVarHttpHeaderAcceptSelected === undefined) {
+            // to determine the Accept header
+            const httpHeaderAccepts: string[] = [
+            ];
+            localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        }
+        if (localVarHttpHeaderAcceptSelected !== undefined) {
+            localVarHeaders = localVarHeaders.set('Accept', localVarHttpHeaderAcceptSelected);
+        }
+
+        let localVarHttpContext: HttpContext | undefined = options && options.context;
+        if (localVarHttpContext === undefined) {
+            localVarHttpContext = new HttpContext();
+        }
+
+
+        let responseType_: 'text' | 'json' | 'blob' = 'json';
+        if (localVarHttpHeaderAcceptSelected) {
+            if (localVarHttpHeaderAcceptSelected.startsWith('text')) {
+                responseType_ = 'text';
+            } else if (this.configuration.isJsonMime(localVarHttpHeaderAcceptSelected)) {
+                responseType_ = 'json';
+            } else {
+                responseType_ = 'blob';
+            }
+        }
+
+        let localVarPath = `/api/assignments/${this.configuration.encodeParam({name: "assignmentId", value: assignmentId, in: "path", style: "simple", explode: false, dataType: "number", dataFormat: "int64"})}/submit`;
+        return this.httpClient.request<any>('put', `${this.configuration.basePath}${localVarPath}`,
+            {
+                context: localVarHttpContext,
+                params: localVarQueryParameters,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,

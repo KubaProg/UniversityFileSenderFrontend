@@ -14,19 +14,17 @@
     <span>{{ data.assignmentData.description }}</span>
   </div>
 
-  <div class="task-detail">
-    <mat-label>Source attachments:</mat-label>
+  <div style="height: 20px;"></div>
+
+  <div class="download-container">
+    <button type="button" mat-raised-button class="download-button" (click)="onDownloadAssignementData(data.assignmentData.id!)">
+      Download assignment attachment
+    </button>
   </div>
 
-  <div *ngFor="let file of sourceAttachments; let i = index" class="attachment">
-    <mat-chip-listbox>
-      <mat-chip (click)="downloadSourceAttachment(file)">
-        {{ file.name }}
-      </mat-chip>
-    </mat-chip-listbox>
-  </div>
+ <div style="height: 20px;"></div>
 
-  <div>
+  <div class="attachment-section">
     <mat-label>Your attachments</mat-label>
     <button type="button" mat-raised-button (click)="fileInput.click()">Choose File</button>
     <input hidden (change)="onFileSelected($event)" #fileInput type="file" multiple>

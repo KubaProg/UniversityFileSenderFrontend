@@ -8,6 +8,9 @@ import { DeleteTaskModalComponent } from "../../admin/admin-panel/modals/delete-
 import { StudentEditTaskModalComponent } from "../../student/student-panel/modals/student-edit-task-modal/student-edit-task-modal.component";
 import {AssignmentControllerService, AssignmentGetDto, UserControllerService} from "../../../api";
 import {AuthService} from "../../../login-screen/auth.service";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {environment} from "../../../../environment";
+import {AssignmentService} from "../../../services/assignment.service";
 
 @Component({
   selector: 'app-task-element-short',
@@ -25,11 +28,11 @@ export class TaskElementShortComponent {
   @Input() teacherid: number | undefined;
   @Input() isStudentMode = false;
   @Output() taskDeleted = new EventEmitter<void>();
-  teacher_name_surname = '';
 
   constructor(
     private dialog: MatDialog,
     private assignmentService: AssignmentControllerService,
+    private assignmentCustomService: AssignmentService
   ) {}
 
   openTaskEditModal() {
@@ -75,10 +78,27 @@ export class TaskElementShortComponent {
     });
 
     dialogRef.afterClosed().subscribe(studentAttachments => {
-    if(studentAttachments){
-      // w requescie student_id, assignment_id, attachment
-      // ma zapisac w bazie encje File oraz STUDENT_ASSIGNMENT_RELATIONSHIP z statusem PENDING
-    }
+      if (studentAttachments) {
+        this.submitAssignment(this.task?.id, studentAttachments);
+      }
     });
+  }
+
+  submitAssignment(assignmentId: number | undefined, files: File[]) {
+    if (!assignmentId) {
+      return;
+    }
+
+    const formData = new FormData();
+    files.forEach(file => formData.append('files', file, file.name));
+
+    this.assignmentCustomService.submitAssignmentUsingPUT(assignmentId, formData).subscribe(
+      () => {
+        console.log('Assignment submitted successfully');
+      },
+      error => {
+        console.error('Failed to submit assignment', error);
+      }
+    );
   }
 }

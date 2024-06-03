@@ -133,6 +133,151 @@ paths:
           description: Unauthorized
         '403':
           description: Forbidden
+  '/api/assignments/{assignmentId}/download':
+    get:
+      tags:
+        - assignment-controller
+      summary: downloadAssignment
+      operationId: downloadAssignmentUsingGET
+      parameters:
+        - name: assignmentId
+          in: path
+          description: assignmentId
+          required: true
+          style: simple
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ByteArrayResource'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  '/api/assignments/{assignmentId}/submit':
+    put:
+      tags:
+        - assignment-controller
+      summary: submitAssignment
+      operationId: submitAssignmentUsingPUT
+      parameters:
+        - name: accountNonExpired
+          in: query
+          required: false
+          style: form
+          schema:
+            type: boolean
+        - name: accountNonLocked
+          in: query
+          required: false
+          style: form
+          schema:
+            type: boolean
+        - name: assignmentId
+          in: path
+          description: assignmentId
+          required: true
+          style: simple
+          schema:
+            type: integer
+            format: int64
+        - name: 'authorities[0].authority'
+          in: query
+          required: false
+          style: form
+          schema:
+            type: string
+        - name: credentialsNonExpired
+          in: query
+          required: false
+          style: form
+          schema:
+            type: boolean
+        - name: enabled
+          in: query
+          required: false
+          style: form
+          schema:
+            type: boolean
+        - name: files
+          in: query
+          required: false
+          style: pipeDelimited
+          schema:
+            type: array
+            items:
+              type: string
+              format: binary
+        - name: firstName
+          in: query
+          required: true
+          style: form
+          schema:
+            maximum: 100
+            minimum: 1
+            maxLength: 100
+            minLength: 1
+            type: string
+        - name: id
+          in: query
+          required: false
+          style: form
+          schema:
+            type: integer
+            format: int64
+        - name: lastName
+          in: query
+          required: true
+          style: form
+          schema:
+            maximum: 100
+            minimum: 1
+            maxLength: 100
+            minLength: 1
+            type: string
+        - name: password
+          in: query
+          required: true
+          style: form
+          schema:
+            type: string
+        - name: role
+          in: query
+          required: true
+          style: form
+          schema:
+            type: string
+            enum:
+              - ROLE_STUDENT
+              - ROLE_TEACHER
+        - name: username
+          in: query
+          required: true
+          style: form
+          schema:
+            maximum: 100
+            minimum: 8
+            maxLength: 100
+            minLength: 8
+            type: string
+      responses:
+        '200':
+          description: OK
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
   '/api/assignments/{assignmentId}/users':
     get:
       tags:
@@ -930,6 +1075,110 @@ paths:
           description: Forbidden
         '404':
           description: Not Found
+  /api/users/current/courses/not-assigned:
+    get:
+      tags:
+        - user-controller
+      summary: getNotAssignedCoursesforCurrentStudent
+      operationId: getNotAssignedCoursesforCurrentStudentUsingGET
+      parameters:
+        - name: accountNonExpired
+          in: query
+          required: false
+          style: form
+          schema:
+            type: boolean
+        - name: accountNonLocked
+          in: query
+          required: false
+          style: form
+          schema:
+            type: boolean
+        - name: 'authorities[0].authority'
+          in: query
+          required: false
+          style: form
+          schema:
+            type: string
+        - name: credentialsNonExpired
+          in: query
+          required: false
+          style: form
+          schema:
+            type: boolean
+        - name: enabled
+          in: query
+          required: false
+          style: form
+          schema:
+            type: boolean
+        - name: firstName
+          in: query
+          required: true
+          style: form
+          schema:
+            maximum: 100
+            minimum: 1
+            maxLength: 100
+            minLength: 1
+            type: string
+        - name: id
+          in: query
+          required: false
+          style: form
+          schema:
+            type: integer
+            format: int64
+        - name: lastName
+          in: query
+          required: true
+          style: form
+          schema:
+            maximum: 100
+            minimum: 1
+            maxLength: 100
+            minLength: 1
+            type: string
+        - name: password
+          in: query
+          required: true
+          style: form
+          schema:
+            type: string
+        - name: role
+          in: query
+          required: true
+          style: form
+          schema:
+            type: string
+            enum:
+              - ROLE_STUDENT
+              - ROLE_TEACHER
+        - name: username
+          in: query
+          required: true
+          style: form
+          schema:
+            maximum: 100
+            minimum: 8
+            maxLength: 100
+            minLength: 8
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CourseDto'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
   /api/users/current/courses/pending:
     get:
       tags:
@@ -1062,12 +1311,12 @@ paths:
           description: Forbidden
         '404':
           description: Not Found
-  '/api/users/{userId}/assignments/{assignmentId}':
+  '/api/users/{userId}/assignments/{assignmentId}/download':
     get:
       tags:
         - user-controller
-      summary: downloadAssignment
-      operationId: downloadAssignmentUsingGET
+      summary: downloadStudentAttachment
+      operationId: downloadStudentAttachmentUsingGET
       parameters:
         - name: userId
           in: path
@@ -1091,9 +1340,7 @@ paths:
           content:
             '*/*':
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/FileDto'
+                $ref: '#/components/schemas/ByteArrayResource'
         '401':
           description: Unauthorized
         '403':
@@ -1123,6 +1370,32 @@ components:
           type: string
         username:
           type: string
+    ByteArrayResource:
+      title: ByteArrayResource
+      type: object
+      properties:
+        byteArray:
+          type: string
+          format: byte
+        description:
+          type: string
+        file:
+          type: string
+          format: binary
+        filename:
+          type: string
+        inputStream:
+          $ref: '#/components/schemas/InputStream'
+        open:
+          type: boolean
+        readable:
+          type: boolean
+        uri:
+          type: string
+          format: uri
+        url:
+          type: string
+          format: url
     CourseDto:
       title: CourseDto
       type: object
@@ -1171,15 +1444,20 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/StudentAssignmentRelationshipDto'
-    FileDto:
-      title: FileDto
+    FileDetailsDto:
+      title: FileDetailsDto
       type: object
       properties:
         fileName:
           type: string
+        fileType:
+          type: string
         id:
           type: integer
           format: int64
+    InputStream:
+      title: InputStream
+      type: object
     ModelAndView:
       title: ModelAndView
       type: object
@@ -1294,7 +1572,7 @@ components:
         files:
           type: array
           items:
-            $ref: '#/components/schemas/FileDto'
+            $ref: '#/components/schemas/FileDetailsDto'
         id:
           type: integer
           format: int64

@@ -9,15 +9,11 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { FileDetailsDto } from './fileDetailsDto';
 
 
-export interface StudentAssignmentRelationshipDto { 
-    files?: Array<FileDetailsDto>;
+export interface FileDetailsDto { 
+    fileName?: string;
+    fileType?: string;
     id?: number;
-    status?: string;
-    studentFirstName?: string;
-    studentId?: number;
-    studentLastName?: string;
 }
 

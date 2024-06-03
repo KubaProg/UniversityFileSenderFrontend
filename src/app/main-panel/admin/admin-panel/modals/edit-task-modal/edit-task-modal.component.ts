@@ -13,7 +13,7 @@ import {
 import { MatFormField, MatLabel, MatSuffix } from "@angular/material/form-field";
 import { MatIcon } from "@angular/material/icon";
 import { MatInput } from "@angular/material/input";
-import { NgForOf, DatePipe } from "@angular/common";
+import {NgForOf, DatePipe, NgIf} from "@angular/common";
 import { provideNativeDateAdapter } from "@angular/material/core";
 import { MatExpansionModule, MatExpansionPanel, MatExpansionPanelTitle } from "@angular/material/expansion";
 import {
@@ -26,9 +26,11 @@ import {
   MatTable,
   MatTableDataSource
 } from "@angular/material/table";
-import { AssignmentControllerService, AssignmentGetDto, StudentAndAssignmentStatusDto } from "../../../../../api";
+import {
+  AssignmentGetDto,
+  StudentAndAssignmentStatusDto,
+} from "../../../../../api";
 import {AssignmentService} from "../../../../../services/assignment.service";
-import {F} from "@angular/cdk/keycodes"; // Update the path as per your project structure
 
 @Component({
   selector: 'app-edit-task-modal',
@@ -63,7 +65,8 @@ import {F} from "@angular/cdk/keycodes"; // Update the path as per your project 
     MatRowDef,
     MatHeaderRow,
     MatRow,
-    MatHeaderRowDef
+    MatHeaderRowDef,
+    NgIf
   ],
   providers: [
     provideNativeDateAdapter(),
@@ -89,8 +92,6 @@ export class EditTaskModalComponent implements OnInit {
   ngOnInit(): void {
     const assignmentData = this.data.assignmentData;
 
-    console.log(assignmentData);
-
     const formattedDeadlineDate = this.datePipe.transform(assignmentData.deadlineDate, 'yyyy-MM-dd') || '';
 
     this.taskForm = this.formBuilder.group({
@@ -103,7 +104,6 @@ export class EditTaskModalComponent implements OnInit {
     if (assignmentData.id) {
       this.assignmentService.getStudentsByAssignmentIdUsingGET(assignmentData.id).subscribe(
         (students: StudentAndAssignmentStatusDto[]) => {
-          console.log(students[0]?.status);
           this.assignedPeople.data = students;
         },
         (error) => {
@@ -131,8 +131,8 @@ export class EditTaskModalComponent implements OnInit {
     this.attachments.splice(index, 1);
   }
 
-  onDownloadSubmission(person: any) {
-    console.log("Downloading students submission if present");
+  onDownloadSubmission(assignmentId: number, student: StudentAndAssignmentStatusDto) {
+    this.assignmentService.downloadStudentAttachmentAndSave(student.student?.id!,assignmentId);
   }
 
   onSubmit(formValue: any) {
@@ -156,5 +156,9 @@ export class EditTaskModalComponent implements OnInit {
         console.error('Failed to update assignment', error);
       }
     );
+  }
+
+  onDownloadAssignementData(assignmentId: number) {
+  this.assignmentService.downloadAssignmentAndSave(assignmentId);
   }
 }

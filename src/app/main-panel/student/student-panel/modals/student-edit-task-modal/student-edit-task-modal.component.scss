@@ -3,13 +3,13 @@
   flex-direction: column;
   align-items: flex-start;
   padding: 20px;
+  gap: 20px;
 }
 
 .task-detail {
   display: flex;
   flex-direction: column;
   width: 100%;
-  margin-bottom: 20px;
 
   mat-label {
     font-weight: bold;
@@ -23,9 +23,24 @@
   }
 }
 
-textarea[matInput] {
-  min-height: 120px;
-  resize: vertical;
+.download-button {
+  margin-top: 20px;
+  margin-bottom: 20px; /* Ensure space below the download button */
+}
+
+.attachment-section {
+  display: flex;
+  align-items: center;
+  width: 100%;
+
+  mat-label {
+    font-weight: bold;
+    margin-right: 10px;
+  }
+
+  button[mat-raised-button] {
+    margin-left: auto; /* Push the button to the right end */
+  }
 }
 
 .mat-dialog-actions {
@@ -45,17 +60,20 @@ input[type="file"] {
   display: none;
 }
 
-mat-label {
-  font-weight: bold;
-  margin-bottom: 10px;
-}
-
 mat-chip-listbox {
   width: 100%;
   margin-bottom: 10px;
 }
 
 mat-chip {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 10px;
+  border-radius: 4px;
+  background-color: #e0e0e0;
+  margin-bottom: 10px;
+
   mat-icon {
     cursor: pointer;
   }

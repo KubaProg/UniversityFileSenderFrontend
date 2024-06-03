@@ -14,10 +14,11 @@ git_push.sh
 index.ts
 model/assignmentGetDto.ts
 model/authenticationRequest.ts
+model/byteArrayResource.ts
 model/courseDto.ts
 model/courseEnrollmentDetailsDto.ts
 model/detailedAssignmentDto.ts
-model/fileDto.ts
+model/fileDetailsDto.ts
 model/modelAndView.ts
 model/models.ts
 model/saveCourseRequest.ts

@@ -37,7 +37,6 @@ import {MatLabel} from "@angular/material/form-field";
 export class StudentEditTaskModalComponent implements OnInit {
   taskForm!: FormGroup;
   attachments: File[] = [];
-  sourceAttachments: any[] = [];
 
   constructor(
     public dialogRef: MatDialogRef<StudentEditTaskModalComponent>,
@@ -58,12 +57,6 @@ export class StudentEditTaskModalComponent implements OnInit {
       description: [{ value: assignmentData.description || '', disabled: true }],
       attachment: [null]
     });
-
-    this.sourceAttachments = [
-      new File([''], 'source1.pdf'),
-      new File([''], 'source2.docx')
-      // tutaj powinien byc attachment co przyjdzie z osobnego endpintu getattachmentbyassignmentid?
-    ];
   }
 
   onCancelClick(): void {
@@ -84,12 +77,7 @@ export class StudentEditTaskModalComponent implements OnInit {
     this.attachments.splice(index, 1);
   }
 
-  downloadSourceAttachment(file: any) {
-    const url = URL.createObjectURL(file);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = file.name;
-    a.click();
-    URL.revokeObjectURL(url);
+  onDownloadAssignementData(assignmentId: number) {
+    this.assignmentService.downloadAssignmentAndSave(assignmentId);
   }
 }
