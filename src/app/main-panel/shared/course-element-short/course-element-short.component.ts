@@ -97,9 +97,7 @@ export class CourseElementShortComponent implements OnInit{
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      if(result){
         this.courseDeleted.next();
-      }
     });
   }
 

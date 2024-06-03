@@ -43,6 +43,7 @@ export class CoursePanelComponent implements OnInit {
   ngOnInit() {
 
     this.courseStateService.currentCourse.subscribe(course => {
+
       if (course) {
         this.course = course;
         this.loadTasks();

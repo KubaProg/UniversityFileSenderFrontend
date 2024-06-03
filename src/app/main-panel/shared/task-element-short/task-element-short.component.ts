@@ -6,7 +6,7 @@ import { RouterLink } from "@angular/router";
 import { EditTaskModalComponent } from "../../admin/admin-panel/modals/edit-task-modal/edit-task-modal.component";
 import { DeleteTaskModalComponent } from "../../admin/admin-panel/modals/delete-task-modal/delete-task-modal.component";
 import { StudentEditTaskModalComponent } from "../../student/student-panel/modals/student-edit-task-modal/student-edit-task-modal.component";
-import {AssignmentControllerService, AssignmentGetDto, UserControllerService} from "../../../api";
+import {AssignmentControllerService, AssignmentGetDto, CourseDto, UserControllerService} from "../../../api";
 import {AuthService} from "../../../login-screen/auth.service";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {environment} from "../../../../environment";
@@ -28,6 +28,7 @@ export class TaskElementShortComponent {
   @Input() teacherid: number | undefined;
   @Input() isStudentMode = false;
   @Output() taskDeleted = new EventEmitter<void>();
+  @Input() course!: CourseDto | undefined;
 
   constructor(
     private dialog: MatDialog,
