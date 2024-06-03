@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import {AssignmentGetDto, CourseEnrollmentDetailsDto} from '../../../../api';
+import {AssignmentGetDto, CourseDto, CourseEnrollmentDetailsDto} from '../../../../api';
 import {environment} from "../../../../../environment"; // Adjust path as necessary
 
 @Injectable({
@@ -23,6 +23,16 @@ export class CustomCourseService {
   acceptEnrollment(enrollmentId: number): Observable<void> {
     const url = `${environment.apiUrl}/api/course-enrollments/${enrollmentId}/accept`;
     return this.httpClient.put<void>(url, {});
+  }
+
+  getNotAssignedCourses(): Observable<CourseDto[]> {
+    const url = `${environment.apiUrl}/api/users/current/courses/not-assigned`;
+    return this.httpClient.get<CourseDto[]>(url);
+  }
+
+  createPendingEnrollment(courseId: number): Observable<void> {
+    const url = `${environment.apiUrl}/api/courses/${courseId}/course-enrollments`;
+    return this.httpClient.post<void>(url, {});
   }
 
 }

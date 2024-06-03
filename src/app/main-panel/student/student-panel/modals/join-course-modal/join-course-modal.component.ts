@@ -1,4 +1,4 @@
-import {Component, Inject} from '@angular/core';
+import {Component, EventEmitter, Inject, Output} from '@angular/core';
 import {
   MAT_DIALOG_DATA,
   MatDialogActions,
@@ -11,6 +11,8 @@ import {MatButton} from "@angular/material/button";
 import {MatFormField, MatLabel} from "@angular/material/form-field";
 import {MatInput} from "@angular/material/input";
 import {ReactiveFormsModule} from "@angular/forms";
+import {CourseDto} from "../../../../../api";
+import {CustomCourseService} from "../../../../admin/admin-panel/course-panel/custom-course.service";
 
 @Component({
   selector: 'app-join-course-modal',
@@ -32,13 +34,23 @@ export class JoinCourseModalComponent {
 
   constructor(
     public dialogRef: MatDialogRef<JoinCourseModalComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: addTaskDialogData
+    @Inject(MAT_DIALOG_DATA) public data: CourseDto,
+    private courseService: CustomCourseService
   ) {}
 
-
   onRequestCourseJoin() {
-    console.log('Request course join')
-
+    if(this.data.id){
+      this.courseService.createPendingEnrollment(this.data.id).subscribe(
+        () => {
+          console.log('Enrollment request sent successfully');
+          this.dialogRef.close(true);
+        },
+        error => {
+          console.error('Error requesting enrollment:', error);
+        }
+      );
+    }
   }
 
-}
+
+  }

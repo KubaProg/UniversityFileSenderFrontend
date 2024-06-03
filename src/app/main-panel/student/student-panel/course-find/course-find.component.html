@@ -12,6 +12,7 @@
     *ngFor="let course of filteredCourses"
     [course]="course"
     [isStudent]="true"
-    [findMode]="true">
+    [findMode]="true"
+    (courseDeleted)="loadNotAssignedCourses()">
   </app-course-element-short>
 </div>

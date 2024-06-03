@@ -91,12 +91,16 @@ export class CourseElementShortComponent implements OnInit{
     });
   }
 
-
-
   openJoinCourseModal(course: CourseDto | undefined) {
     const dialogRef = this.dialog.open(JoinCourseModalComponent, {
-      data: {course: this.course},
-      width: '400px'
+      data: course
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(result){
+        this.courseDeleted.next();
+      }
     });
   }
+
 }
